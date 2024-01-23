@@ -29,7 +29,11 @@ public class BuyerServiceImpl implements BuyerService {
             }
             return publishedArts;
         }
-        return null;
-//        throw new BuyerDoNotExist
+
+    }
+
+    private boolean validateBuyer(String email){
+        Optional<Buyer> buyer = buyerRepository.findByEmail(email);
+        return buyer.isPresent();
     }
 }
