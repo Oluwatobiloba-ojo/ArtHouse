@@ -1,36 +1,34 @@
 package org.example.services;
 
 import org.example.data.repository.ArtistRepository;
+import org.example.data.repository.BuyerRepository;
 import org.example.dto.request.LoginRequest;
 import org.example.dto.request.RegisterRequest;
-import org.example.exceptions.ArtistExistException;
-import org.example.exceptions.InvalidEmailException;
-import org.example.exceptions.InvalidPasswordException;
-import org.example.exceptions.InvalidUsernameException;
+import org.example.exceptions.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-@SpringBootTest
-class ArtistServiceTest {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+ @SpringBootTest
+public class BuyerServiceImplTest {
+     @Autowired
+    private BuyerService buyerService;
     @Autowired
-    private ArtistService artistService;
-    @Autowired
-    private ArtistRepository artistRepository;
+    private BuyerRepository buyerRepository;
     @AfterEach
     public void deleteBeforeTest(){
-        //artistRepository.deleteAll();
+        buyerRepository.deleteAll();
     }
     @Test
-     public  void  testThatAnArtist_CanRegisterWithWrongUsernameThrowsException(){
+    public  void  testThatAnArtist_CanRegisterWithWrongUsernameThrowsException(){
         RegisterRequest registerRequest = new RegisterRequest();
         registerRequest.setUsername("star girl8");
         registerRequest.setPassword("joy,1234");
         registerRequest.setEmail("joytim7277@gmail.com");
-        assertThrows(InvalidUsernameException.class,()->artistService.register(registerRequest));
+        assertThrows(InvalidUsernameException.class,()->buyerService.register(registerRequest));
     }
     @Test
     public void testWhenArtistRegisterWithWrongPasswordThrowsException(){
@@ -38,7 +36,7 @@ class ArtistServiceTest {
         registerRequest.setUsername("Precious");
         registerRequest.setPassword("ada");
         registerRequest.setEmail("joytim7277@gmail.com");
-        assertThrows(ArtistExistException.class, ()->artistService.register(registerRequest));
+        assertThrows(InvalidPasswordException.class, ()->buyerService.register(registerRequest));
     }
     @Test
     public void testThatWhenArtistRegisterWithWrongEmailThrowsException(){
@@ -46,20 +44,9 @@ class ArtistServiceTest {
         registerRequest.setUsername("Precious");
         registerRequest.setPassword("OlaPrecious");
         registerRequest.setEmail("joyt");
-        assertThrows(ArtistExistException.class, ()->artistService.register(registerRequest));
+        assertThrows(InvalidEmailException.class, ()->buyerService.register(registerRequest));
     }
-    @Test
-    public void testThatArtistRegisterWithCorrectInfoReturnsArtistObjects(){
-        RegisterRequest registerRequest = new RegisterRequest();
-        registerRequest.setUsername("Precious");
-        registerRequest.setPassword("OlaPrecious");
-        registerRequest.setEmail("joy@gmail.com");
-        assertEquals(1, artistRepository.count());
-    }
-    @Test
-    public void testThatArtistCanDisplayArtToTheTheArtGallery(){
-
-    }
+  
 
     @Test
     public void testThatArtistCanRegisterAgainWithCorrectInfoReturnsArtistObjects(){
@@ -67,7 +54,8 @@ class ArtistServiceTest {
         registerRequest.setUsername("Precious");
         registerRequest.setPassword("OlaPrecious");
         registerRequest.setEmail("joy@gmail.com");
-        assertThrows(ArtistExistException.class,()->artistService.register(registerRequest));
+        buyerService.register(registerRequest);
+        assertThrows(BuyerExistException.class,()->buyerService.register(registerRequest));
     }
 
     @Test
@@ -77,10 +65,10 @@ class ArtistServiceTest {
         registerRequest.setUsername("Sandra");
         registerRequest.setPassword("Olaoluwajohn");
         registerRequest.setEmail("joy@gmail.com");
-        artistService.register(registerRequest) ;
-        loginRequest.setUsername("Sandraz1zz1     ");
+        buyerService.register(registerRequest) ;
+        loginRequest.setUsername("Sandra");
         loginRequest.setPassword("Olaoluwajohn");
         loginRequest.setEmail("joy@gmail.com");
-        artistService.login(loginRequest);
+        buyerService.login(loginRequest);
     }
 }
