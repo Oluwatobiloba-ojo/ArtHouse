@@ -5,17 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ccd1d79c-847f-4d97-ab7d-8c84e6c0229e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/exceptions/ArtistExistException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/exceptions/InvalidEmailException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/exceptions/InvalidPasswordException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/exceptions/InvalidUsernameException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/utils/Mapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/utils/Validator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/dto/request/LoginRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/exceptions/BuyerExistException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/exceptions/InvalidDetailsException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/services/BuyerServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/services/BuyerServiceImplTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/data/repository/ArtistRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/data/repository/ArtistRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/data/model/Buyer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/data/model/Buyer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/data/repository/BuyerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/data/repository/BuyerRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/services/ArtistService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/services/ArtistService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/services/ArtistServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/services/ArtistServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/services/BuyerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/services/BuyerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/utils/Mapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/utils/Mapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/org/example/services/ArtistServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/services/ArtistServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -82,21 +83,8 @@
       <recent name="org.example.services" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ArtistServiceTest.testThatArtistRegisterWithCorrectInfoReturnsArtistObjects">
-    <configuration name="Validator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.example.utils.Validator" />
-      <module name="ArtHouse" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.example.utils.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ArtistServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.BuyerServiceImplTest.testThatArtistCan_RegisterAndLogin">
+    <configuration name="BuyerServiceImplTest.testThatArtistCanRegisterAgainWithCorrectInfoReturnsArtistObjects" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ArtHouse" />
       <extension name="coverage">
         <pattern>
@@ -105,13 +93,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="org.example.services" />
-      <option name="MAIN_CLASS_NAME" value="org.example.services.ArtistServiceTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="MAIN_CLASS_NAME" value="org.example.services.BuyerServiceImplTest" />
+      <option name="METHOD_NAME" value="testThatArtistCanRegisterAgainWithCorrectInfoReturnsArtistObjects" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ArtistServiceTest.testThatArtistRegisterWithCorrectInfoReturnsArtistObjects" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="BuyerServiceImplTest.testThatArtistCan_RegisterAndLogin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ArtHouse" />
       <extension name="coverage">
         <pattern>
@@ -120,14 +109,30 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="org.example.services" />
-      <option name="MAIN_CLASS_NAME" value="org.example.services.ArtistServiceTest" />
+      <option name="MAIN_CLASS_NAME" value="org.example.services.BuyerServiceImplTest" />
+      <option name="METHOD_NAME" value="testThatArtistCan_RegisterAndLogin" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BuyerServiceImplTest.testThatArtistRegisterWithCorrectInfoReturnsArtistObjects" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ArtHouse" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example.services" />
+      <option name="MAIN_CLASS_NAME" value="org.example.services.BuyerServiceImplTest" />
       <option name="METHOD_NAME" value="testThatArtistRegisterWithCorrectInfoReturnsArtistObjects" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ArtistServiceTest.testThatWhenArtistRegisterWithWrongEmailThrowsException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="BuyerServiceImplTest.testThatWhenArtistRegisterWithWrongEmailThrowsException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ArtHouse" />
       <extension name="coverage">
         <pattern>
@@ -136,14 +141,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="org.example.services" />
-      <option name="MAIN_CLASS_NAME" value="org.example.services.ArtistServiceTest" />
+      <option name="MAIN_CLASS_NAME" value="org.example.services.BuyerServiceImplTest" />
       <option name="METHOD_NAME" value="testThatWhenArtistRegisterWithWrongEmailThrowsException" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ArtistServiceTest.testWhenArtistRegisterWithWrongPasswordThrowsException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="BuyerServiceImplTest.testWhenArtistRegisterWithWrongPasswordThrowsException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ArtHouse" />
       <extension name="coverage">
         <pattern>
@@ -152,7 +157,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="org.example.services" />
-      <option name="MAIN_CLASS_NAME" value="org.example.services.ArtistServiceTest" />
+      <option name="MAIN_CLASS_NAME" value="org.example.services.BuyerServiceImplTest" />
       <option name="METHOD_NAME" value="testWhenArtistRegisterWithWrongPasswordThrowsException" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
@@ -161,11 +166,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ArtistServiceTest.testThatArtistRegisterWithCorrectInfoReturnsArtistObjects" />
-        <item itemvalue="JUnit.ArtistServiceTest.testWhenArtistRegisterWithWrongPasswordThrowsException" />
-        <item itemvalue="JUnit.ArtistServiceTest.testThatWhenArtistRegisterWithWrongEmailThrowsException" />
-        <item itemvalue="Application.Validator" />
-        <item itemvalue="JUnit.ArtistServiceTest" />
+        <item itemvalue="JUnit.BuyerServiceImplTest.testThatArtistCan_RegisterAndLogin" />
+        <item itemvalue="JUnit.BuyerServiceImplTest.testThatArtistCanRegisterAgainWithCorrectInfoReturnsArtistObjects" />
+        <item itemvalue="JUnit.BuyerServiceImplTest.testThatArtistRegisterWithCorrectInfoReturnsArtistObjects" />
+        <item itemvalue="JUnit.BuyerServiceImplTest.testThatWhenArtistRegisterWithWrongEmailThrowsException" />
+        <item itemvalue="JUnit.BuyerServiceImplTest.testWhenArtistRegisterWithWrongPasswordThrowsException" />
       </list>
     </recent_temporary>
   </component>
