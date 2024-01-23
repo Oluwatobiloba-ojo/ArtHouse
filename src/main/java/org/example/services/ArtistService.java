@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ArtistService {
-    void register(RegisterRequest registerRequest);
+    Artist register(RegisterRequest registerRequest);
 
     List<Art> findArtsBelongingTo(String email);
 

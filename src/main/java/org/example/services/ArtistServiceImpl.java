@@ -1,8 +1,11 @@
 package org.example.services;
 
+import org.example.data.model.Art;
 import org.example.data.model.Artist;
 import org.example.data.repository.ArtistRepository;
+import org.example.dto.request.FindAArtRequest;
 import org.example.dto.request.RegisterRequest;
+import org.example.dto.request.RemoveAArtRequest;
 import org.example.exceptions.ArtistExistException;
 import org.example.exceptions.InvalidEmailException;
 import org.example.exceptions.InvalidPasswordException;
@@ -10,6 +13,12 @@ import org.example.exceptions.InvalidUsernameException;
 import org.example.utils.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import static org.example.utils.Mapper.artistMapper;
 
 @Service
 public class ArtistServiceImpl implements ArtistService {

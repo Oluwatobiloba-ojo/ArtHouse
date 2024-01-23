@@ -1,7 +1,9 @@
 package org.example.services;
 
 import org.example.data.repository.ArtistRepository;
+import org.example.dto.request.FindAArtRequest;
 import org.example.dto.request.RegisterRequest;
+import org.example.dto.request.RemoveAArtRequest;
 import org.example.exceptions.InvalidEmailException;
 import org.example.exceptions.InvalidPasswordException;
 import org.example.exceptions.InvalidUsernameException;
@@ -55,13 +57,10 @@ class ArtistServiceTest {
         assertNotNull(artistService.register(registerRequest));
         assertEquals(1, artistRepository.count());
     }
-    @Autowired
-    private ArtistRepository artistRepository;
-    @Autowired
-    private ArtistService artistService;
 
     @Test
     public void testThatArtistCanFindTheArtThatBelongToThem(){
+
         assertEquals(3,artistService.findArtsBelongingTo("ArtHouse123@gmail.com"));
 
     }
