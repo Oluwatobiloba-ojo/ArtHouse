@@ -13,4 +13,5 @@ public class Artist {
     private String password;
     private boolean isEnable;
     private String email;
+
 }

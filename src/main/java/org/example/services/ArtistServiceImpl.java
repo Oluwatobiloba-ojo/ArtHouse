@@ -1,9 +1,11 @@
 package org.example.services;
 
+import org.example.data.model.Art;
 import org.example.data.model.Artist;
 import org.example.data.repository.ArtistRepository;
 import org.example.dto.request.LoginRequest;
 import org.example.dto.request.RegisterRequest;
+import org.example.exception.UserNotFound;
 import org.example.exceptions.*;
 import org.example.utils.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +13,15 @@ import org.springframework.stereotype.Service;
 
 import static org.example.utils.Mapper.artistMapper;
 
+import static org.example.utils.Mapper.map;
+
 @Service
 public class ArtistServiceImpl implements ArtistService{
     @Autowired
     private ArtistRepository artistRepository;
+    @Autowired
+    ArtService artService;
+
     @Override
     public Artist register(RegisterRequest registerRequest) {
      if (checkIfArtistExist(registerRequest.getUsername()))
@@ -42,6 +49,14 @@ public class ArtistServiceImpl implements ArtistService{
         foundArtist.setEnable(false);
         artistRepository.save(foundArtist);
     }
+    public void displayArt(String email, Art art) {
+        Artist artist = artistRepository.findArtistByEmail(email);
+        if (artist == null) throw new UserNotFound("Artist not found");
+        art = map(art.getName(), 8999 + artService.count()+1);
+        art.setArtist(artist);
+        art.setId(art.getId());
+        artService.save(art);
+    }
 
     public  void  validations(RegisterRequest registerRequest){
          if (!Validator.validateName(registerRequest.getUsername())) {
@@ -55,10 +70,23 @@ public class ArtistServiceImpl implements ArtistService{
          }
 
      }
-    public boolean checkIfArtistExist(String artistName){
+    public boolean checkIfArtistExist(String artistName) {
         Artist artist = artistRepository.findByUsername(artistName);
         if (artist == null) {
-            return false;}
-        else return true;
+            return false;
+        } else return true;
+    }
+
+    @Override
+    public Artist findArtist(String email) {
+        Artist artist = artistRepository.findArtistByEmail(email);
+        return artist;
+    }
+
+    @Override
+    public void remove(String email) {
+        artService.findArtsBelongingTo(email);
+        Artist artist = artistRepository.findArtistByEmail(email);
+        artistRepository.delete(artist);
     }
 }
