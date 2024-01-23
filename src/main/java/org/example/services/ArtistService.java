@@ -1,5 +1,6 @@
 package org.example.services;
 
+import org.example.data.model.Artist;
 import org.example.data.model.Art;
 import org.example.data.model.Artist;
 import org.example.dto.request.FindAArtRequest;
@@ -18,4 +19,7 @@ public interface ArtistService {
 
 
     void removeAArt(RemoveAArtRequest removeAArtRequest);
+
+
+
 }
