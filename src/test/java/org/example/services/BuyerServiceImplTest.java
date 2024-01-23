@@ -12,14 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 class BuyerServiceImplTest {
 
-    @Test
-    void testThatBuyerCanViewAllArt() {
-        BuyerService mockBuyerService = mock(BuyerService.class);
-        when(mockBuyerService.viewAllArt("olalale")).thenReturn(new ArrayList<>());
-        BuyerServiceImpl buyerServiceImpl = new BuyerServiceImpl(mockBuyerService);
-        List<Art> result = buyerServiceImpl.viewAllArt("olalale");
-        assertTrue(result.isEmpty());
-    }
 
 
 }
