@@ -13,5 +13,7 @@ public class Buyer {
     private String password;
     private boolean isEnable;
     private String email;
+
+
 }
 

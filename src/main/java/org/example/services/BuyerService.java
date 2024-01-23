@@ -1,5 +1,9 @@
 package org.example.services;
 
-public interface BuyerService {
+import org.example.data.model.Art;
 
+import java.util.List;
+
+public interface BuyerService {
+    List<Art> viewAllArt(String email);
 }
