@@ -1,6 +1,5 @@
 package org.example.services;
 
-import org.example.data.model.Art;
 import org.example.data.model.Artist;
 import org.example.data.repository.ArtistRepository;
 import org.example.dto.request.FindAArtRequest;
@@ -14,14 +13,10 @@ import org.example.utils.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 import static org.example.utils.Mapper.artistMapper;
 
 @Service
-public class ArtistServiceImpl implements ArtistService {
+public class ArtistServiceImpl implements ArtistService{
     @Autowired
     private ArtistRepository artistRepository;
     @Autowired
@@ -36,7 +31,27 @@ public class ArtistServiceImpl implements ArtistService {
      Artist artist = artistMapper(registerRequest);
      return artistRepository.save(artist);
     }
-     public  void  validations(RegisterRequest registerRequest){
+
+    @Override
+    public void login(LoginRequest loginRequest) {
+     Artist foundArtist = artistRepository.findByUsername(loginRequest.getUsername());
+     if (!checkIfArtistExist(loginRequest.getUsername())) {
+       throw new ArtistExistException("Artist May Not exist") ;
+     }
+     if (!foundArtist.getUsername().equalsIgnoreCase(loginRequest.getUsername())){
+        throw new InvalidDetailsException("Details entered are invalid");
+     }
+        if (!foundArtist.getPassword().equalsIgnoreCase(loginRequest.getPassword())){
+            throw new InvalidDetailsException("Details entered are invalid");
+        }
+        if (!foundArtist.getEmail().equalsIgnoreCase(loginRequest.getEmail())){
+            throw new InvalidDetailsException("Details entered are invalid");
+        }
+        foundArtist.setEnable(false);
+        artistRepository.save(foundArtist);
+    }
+
+    public  void  validations(RegisterRequest registerRequest){
          if (!Validator.validateName(registerRequest.getUsername())) {
              throw new InvalidUsernameException("Invalid username");
          }

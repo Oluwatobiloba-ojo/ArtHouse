@@ -2,8 +2,10 @@ package org.example.services;
 
 import org.example.data.repository.ArtistRepository;
 import org.example.dto.request.FindAArtRequest;
+import org.example.dto.request.LoginRequest;
 import org.example.dto.request.RegisterRequest;
 import org.example.dto.request.RemoveAArtRequest;
+import org.example.exceptions.ArtistExistException;
 import org.example.exceptions.InvalidEmailException;
 import org.example.exceptions.InvalidPasswordException;
 import org.example.exceptions.InvalidUsernameException;
@@ -58,6 +60,28 @@ class ArtistServiceTest {
         assertEquals(1, artistRepository.count());
     }
 
+    @Test
+    public void testThatArtistCanRegisterAgainWithCorrectInfoReturnsArtistObjects(){
+        RegisterRequest registerRequest = new RegisterRequest();
+        registerRequest.setUsername("Precious");
+        registerRequest.setPassword("OlaPrecious");
+        registerRequest.setEmail("joy@gmail.com");
+        assertThrows(ArtistExistException.class,()->artistService.register(registerRequest));
+    }
+
+    @Test
+    public void testThatArtistCan_RegisterAndLogin(){
+        RegisterRequest registerRequest = new RegisterRequest();
+        LoginRequest loginRequest = new LoginRequest();
+        registerRequest.setUsername("Sandra");
+        registerRequest.setPassword("Olaoluwajohn");
+        registerRequest.setEmail("joy@gmail.com");
+        artistService.register(registerRequest) ;
+        loginRequest.setUsername("Sandraz1zz1     ");
+        loginRequest.setPassword("Olaoluwajohn");
+        loginRequest.setEmail("joy@gmail.com");
+        artistService.login(loginRequest);
+    }
     @Test
     public void testThatArtistCanFindTheArtThatBelongToThem(){
 
