@@ -5,18 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ccd1d79c-847f-4d97-ab7d-8c84e6c0229e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/exceptions/ArtistExistException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/exceptions/InvalidEmailException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/exceptions/InvalidPasswordException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/exceptions/InvalidUsernameException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/utils/Mapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/utils/Validator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/data/repository/ArtistRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/data/repository/ArtistRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/services/ArtistService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/services/ArtistService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/services/ArtistServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/services/ArtistServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/utils/Mapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/utils/Mapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/services/ArtistServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/services/ArtistServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +74,7 @@
       <recent name="org.example.services" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ArtistServiceTest.testThatArtistRegisterWithCorrectInfoReturnsArtistObjects">
+  <component name="RunManager" selected="JUnit.ArtistServiceTest">
     <configuration name="Validator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.utils.Validator" />
       <module name="ArtHouse" />
@@ -161,11 +153,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ArtistServiceTest" />
         <item itemvalue="JUnit.ArtistServiceTest.testThatArtistRegisterWithCorrectInfoReturnsArtistObjects" />
         <item itemvalue="JUnit.ArtistServiceTest.testWhenArtistRegisterWithWrongPasswordThrowsException" />
         <item itemvalue="JUnit.ArtistServiceTest.testThatWhenArtistRegisterWithWrongEmailThrowsException" />
         <item itemvalue="Application.Validator" />
-        <item itemvalue="JUnit.ArtistServiceTest" />
       </list>
     </recent_temporary>
   </component>
@@ -177,7 +169,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1705929357470</updated>
-      <workItem from="1705929358450" duration="7274000" />
+      <workItem from="1705929358450" duration="12236000" />
     </task>
     <servers />
   </component>

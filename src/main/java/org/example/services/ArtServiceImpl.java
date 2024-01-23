@@ -1,2 +1,4 @@
-package org.example.services;public class ArtServiceImpl {
+package org.example.services;
+public class ArtServiceImpl {
+
 }

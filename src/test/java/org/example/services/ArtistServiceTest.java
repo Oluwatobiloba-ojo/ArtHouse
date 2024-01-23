@@ -55,5 +55,9 @@ class ArtistServiceTest {
         assertNotNull(artistService.register(registerRequest));
         assertEquals(1, artistRepository.count());
     }
+    @Test
+    public void testThatArtistCanDisplayArtToTheTheArtGallery(){
+
+    }
 
 }

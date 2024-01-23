@@ -35,7 +35,6 @@ public class ArtistServiceImpl implements ArtistService{
          if (!Validator.validateEmail(registerRequest.getEmail())) {
              throw new InvalidEmailException("Invalid Email");
          }
-
      }
     public boolean checkIfArtistExist(String artistName){
         Artist artist = artistRepository.findByUsername(artistName);

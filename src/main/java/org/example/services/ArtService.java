@@ -1,2 +1,3 @@
-package org.example.services;public class ArtService {
+package org.example.services;
+public class ArtService {
 }

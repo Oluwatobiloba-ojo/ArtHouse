@@ -12,4 +12,6 @@ public class Mapper {
      artist.setEmail(registerRequest.getEmail());
         return artist;
     }
+
+
 }
