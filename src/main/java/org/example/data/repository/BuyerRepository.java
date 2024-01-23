@@ -7,6 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface BuyerRepository extends JpaRepository<Buyer, Long> {
-//    List<Art> viewAllArt(String email);
 
 }

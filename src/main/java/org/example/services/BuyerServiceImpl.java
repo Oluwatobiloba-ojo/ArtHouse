@@ -13,36 +13,20 @@ import java.util.List;
 
 @Service
 public class BuyerServiceImpl implements BuyerService {
-
-    private final List<RegisterRequest> registerRequests = new ArrayList<>();
+    private AdminService adminService;
     private final FindByEmail findByEmail = new FindByEmail();
-private final BuyerService buyerService;
+    private final List<RegisterRequest> registerRequests = new ArrayList<>();
     @Autowired
-    public BuyerServiceImpl(BuyerService buyerService) {
-        this.buyerService = buyerService;
-    }
+    private  BuyerService buyerService;
+
 
     @Override
-    public List<Art> viewAllArt(String email) {
-        RegisterRequest registerRequest = getRegisterRequestByEmail(email);
-
-        if (registerRequest != null && registerRequest.getUsername().equals(email)) {
+    public void purchaseArt(String email, int artId, int amount) {
             Buyer buyer = getBuyerByEmail(email);
             if (buyer != null && buyer.isEnable()) {
-                return buyerService.viewAllArt(email);
-            }
+
         }
 
-        return List.of();
-    }
-
-    private RegisterRequest getRegisterRequestByEmail(String email) {
-        for (RegisterRequest request : registerRequests) {
-            if (request.getEmail().equals(email)) {
-                return request;
-            }
-        }
-        return null;
     }
 
 

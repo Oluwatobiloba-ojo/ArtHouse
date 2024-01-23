@@ -1,9 +1,10 @@
 package org.example.services;
 
+import org.example.data.model.Artist;
 import org.example.dto.request.RegisterRequest;
 
 public interface ArtistService {
 
 
-    void register(RegisterRequest registerRequest);
+    Artist register(RegisterRequest registerRequest);
 }

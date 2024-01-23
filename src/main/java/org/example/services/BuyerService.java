@@ -5,5 +5,6 @@ import org.example.data.model.Art;
 import java.util.List;
 
 public interface BuyerService {
-    List<Art> viewAllArt(String email);
+    void purchaseArt(String email, int atrId, int amount);
+
 }
