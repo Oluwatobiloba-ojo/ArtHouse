@@ -9,5 +9,5 @@ public class DisplayArtRequest {
     private String artName;
     private String description;
     private BigDecimal amount;
-    private String artistEmail;
+    private String artistUsername;
 }
