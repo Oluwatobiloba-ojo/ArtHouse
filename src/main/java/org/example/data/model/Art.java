@@ -1,8 +1,6 @@
 package org.example.data.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 
@@ -14,12 +12,14 @@ import java.time.LocalDate;
 public class Art {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
-    private Artist artist;
     private String name;
     private String description;
     private LocalDate dateUploaded = LocalDate.now();
     private boolean isPublished = false;
     private BigDecimal price;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "artist_id", referencedColumnName = "id")
+    private Artist artist;
 }
