@@ -11,8 +11,6 @@ public class Admin  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long adminId;
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<Artist> artistList;
     private String username;
     private String password;
     private boolean isEnable;
