@@ -2,10 +2,7 @@ package org.example.services;
 
 import org.example.data.model.Art;
 import org.example.data.model.Artist;
-import org.example.dto.request.DisplayArtRequest;
-import org.example.dto.request.LoginRequest;
-import org.example.dto.request.RegisterRequest;
-import org.example.dto.request.RemoveAArtRequest;
+import org.example.dto.request.*;
 
 import java.util.List;
 import java.util.Optional;

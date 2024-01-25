@@ -3,21 +3,14 @@ package org.example.services;
 import org.example.data.model.Art;
 import org.example.data.model.Artist;
 import org.example.data.repository.ArtistRepository;
-import org.example.dto.request.DisplayArtRequest;
-import org.example.dto.request.EmailRequest;
-import org.example.dto.request.LoginRequest;
-import org.example.dto.request.FindAArtRequest;
-import org.example.dto.request.RegisterRequest;
-import org.example.dto.request.RemoveAArtRequest;
-import org.example.exceptions.ArtistExistException;
-import org.example.exceptions.InvalidEmailException;
-import org.example.exceptions.InvalidPasswordException;
-import org.example.exceptions.InvalidUsernameException;
+import org.example.dto.request.*;
+import org.example.exceptions.*;
 import org.example.utils.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.example.Main.ADMIN_EMAIL;
 import static org.example.utils.Mapper.artistMapper;
@@ -30,9 +23,6 @@ public class ArtistServiceImpl implements ArtistService{
     private ArtService artService;
     @Autowired
     private EmailService emailService;
-    @Autowired
-    private ArtServices artServices;
-    private ArrayList<Art> listOfArts = new ArrayList<>();
 
     @Override
     public Artist register(RegisterRequest registerRequest) {
@@ -57,6 +47,7 @@ public class ArtistServiceImpl implements ArtistService{
        Artist foundArtist = findArtist(displayArtRequest.getArtistUsername());
        if (!foundArtist.isEnable()) throw new InvalidLoginDetail("User have not login");
        Art art = artService.create(displayArtRequest, foundArtist);
+       art.setPublished(true);
        List<Art> artList = foundArtist.getArtList();
        artList.add(art);
        foundArtist.setArtList(artList);
@@ -91,16 +82,16 @@ public class ArtistServiceImpl implements ArtistService{
     public boolean checkIfArtistExist(String artistUsername){
         Artist artist = findArtist(artistUsername);
         if (artist == null) {
-            return false;}
+            return false;
+        }
         else return true;
 
     }
-
     @Override
     public Art findAArt(FindAArtRequest findAArtRequest) {
         Optional<Artist> artist = artistRepository.findByEmail(findAArtRequest.getEmail());
         if (artist.isPresent()) {
-            return artServices.findAArt(findAArtRequest.getArtId());
+            return artService.findAArt(findAArtRequest.getArtId());
         }
         return null;
     }
@@ -109,7 +100,7 @@ public class ArtistServiceImpl implements ArtistService{
     public void removeAArt(RemoveAArtRequest removeAArtRequest) {
         Optional<Artist> artist = artistRepository.findByEmail(removeAArtRequest.getEmail());
         if (artist.isPresent()) {
-            artServices.removeAArt(removeAArtRequest.getArtId());
+            artService.removeAArt(removeAArtRequest.getArtId());
         }
     }
 

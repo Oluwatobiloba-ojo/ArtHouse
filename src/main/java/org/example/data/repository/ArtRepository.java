@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface ArtRepository extends JpaRepository<Art, Long> {
     Optional<Art> findById(Long artId);
+
 }
