@@ -6,5 +6,5 @@ import org.example.dto.request.UploadRequest;
 public interface AdminService {
     Art uploadArt(UploadRequest uploadRequest);
 
-    void removeArtist(String email);
+    void removeArtist(String username, String email);
 }

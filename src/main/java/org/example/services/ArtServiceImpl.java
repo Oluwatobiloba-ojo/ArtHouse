@@ -8,6 +8,8 @@ import org.example.utils.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ArtServiceImpl implements ArtService {
     @Autowired
@@ -18,20 +20,14 @@ public class ArtServiceImpl implements ArtService {
         save(art);
         return art;
     }
-import org.example.data.repository.ArtRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-
-@Service
-public class ArtServiceImpl implements ArtService{
-    @Autowired
-    ArtRepository artRepository;
-
     @Override
     public void save(Art art) {
         artRepository.save(art);
+    }
+
+    @Override
+    public void delete(List<Art> arts) {
+        artRepository.deleteAll(arts);
     }
 
     @Override

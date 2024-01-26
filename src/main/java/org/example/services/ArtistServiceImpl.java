@@ -7,7 +7,6 @@ import org.example.dto.request.DisplayArtRequest;
 import org.example.dto.request.EmailRequest;
 import org.example.dto.request.LoginRequest;
 import org.example.dto.request.RegisterRequest;
-import org.example.exception.UserNotFound;
 import org.example.exceptions.*;
 import org.example.utils.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +17,14 @@ import java.util.List;
 import static org.example.Main.ADMIN_EMAIL;
 import static org.example.utils.Mapper.artistMapper;
 
-import static org.example.utils.Mapper.map;
-
 @Service
 public class ArtistServiceImpl implements ArtistService{
     @Autowired
     private ArtistRepository artistRepository;
     @Autowired
     ArtService artService;
+    @Autowired
+    EmailService emailService;
 
     @Override
     public Artist register(RegisterRequest registerRequest) {
@@ -71,8 +70,8 @@ public class ArtistServiceImpl implements ArtistService{
         if (!foundArtist.isEnable()) throw new InvalidLoginDetail("Unauthorized request due to invalid login");
         return foundArtist.getArtList();
     }
-
-    private Artist findArtist(String artistUsername) {
+    @Override
+    public Artist findArtist(String artistUsername) {
         return artistRepository.findByUsername(artistUsername);
     }
 
@@ -88,9 +87,19 @@ public class ArtistServiceImpl implements ArtistService{
         } else return true;
     }
     @Override
-    public void remove(String email) {
-        artService.findArtsBelongingTo(email);
+    public void remove(String username, String email) {
+        List<Art> arts = findAllArt(username);
+        artService.delete(arts);
+
         Artist artist = artistRepository.findArtistByEmail(email);
+        if (artist == null) throw new UserNotFound("Error! Artist with this email is not found");
+
         artistRepository.delete(artist);
     }
+
+    @Override
+    public Artist findArtistEmail(String email) {
+        return artistRepository.findArtistByEmail(email);
+    }
 }
+
