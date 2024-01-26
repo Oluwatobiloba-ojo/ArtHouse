@@ -112,24 +112,27 @@ public class BuyerServiceImplTest {
         artistService.login(loginRequestArtist);
         DisplayArtRequest displayArtRequest = new DisplayArtRequest();
         displayArtRequest.setArtistUsername("Iyanu");
+        displayArtRequest.setEmail("deborahdelighted5@gmail.com");
         displayArtRequest.setArtName("Monkey on the tree");
         displayArtRequest.setDescription("A paint picture which is monkey is on the tree");
         displayArtRequest.setAmount(BigDecimal.valueOf(3000));
         artistService.displayArt(displayArtRequest);
         DisplayArtRequest displayArtRequest1 = new DisplayArtRequest();
+        displayArtRequest1.setEmail("deborahdelighted5@gmail.com");
         displayArtRequest1.setArtistUsername("Iyanu");
         displayArtRequest1.setArtName("The theme team");
         displayArtRequest1.setDescription("A paint picture that endorse team");
         displayArtRequest1.setAmount(BigDecimal.valueOf(2500));
         artistService.displayArt(displayArtRequest1);
         DisplayArtRequest displayArtRequest2 = new DisplayArtRequest();
+        displayArtRequest2.setEmail("deborahdelighted5@gmail.com");
         displayArtRequest2.setArtistUsername("Iyanu");
         displayArtRequest2.setArtName("Merge peg");
         displayArtRequest2.setDescription("A paint picture reference collaboration");
         displayArtRequest2.setAmount(BigDecimal.valueOf(4000));
         artistService.displayArt(displayArtRequest2);
-        assertEquals(3, artistService.findAllArt("Iyanu").size());
-        assertEquals(3, buyerService.viewAllPublishedArt("joy@gmail.com","joy@gmail.com").size());
+        assertEquals(3, artistService.findAllArt("Iyanu","deborahdelighted5@gmail.com").size());
+        assertEquals(3, buyerService.viewAllPublishedArt("Sandra","joy@gmail.com").size());
 
     }
 }

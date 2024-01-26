@@ -15,7 +15,7 @@ public interface ArtistService {
     Artist register(RegisterRequest registerRequest);
     void  login(LoginRequest loginRequest);
     void displayArt(DisplayArtRequest displayArtRequest);
-    List<Art> findAllArt(String sandra);
+    List<Art> findAllArt(String sandra,String email);
     Art findAArt(FindAArtRequest findAArtRequest);
     void removeAArt(RemoveAArtRequest removeAArtRequest);
 

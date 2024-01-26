@@ -16,7 +16,7 @@ import static org.example.Main.ADMIN_EMAIL;
 import static org.example.utils.Mapper.artistMapper;
 
 @Service
-public class ArtistServiceImpl implements ArtistService{
+public class ArtistServiceImpl implements ArtistService {
     @Autowired
     private ArtistRepository artistRepository;
     @Autowired
@@ -26,66 +26,69 @@ public class ArtistServiceImpl implements ArtistService{
 
     @Override
     public Artist register(RegisterRequest registerRequest) {
-     if (checkIfArtistExist(registerRequest.getUsername())) throw new ArtistExistException("Artist already exist\t"+ registerRequest.getUsername());
-     validations(registerRequest);
-     Artist artist = artistMapper(registerRequest);
-     return artistRepository.save(artist);
+        if (checkIfArtistExist(registerRequest.getUsername(), registerRequest.getEmail()))
+            throw new ArtistExistException("Artist already exist\t" + registerRequest.getUsername());
+        validations(registerRequest);
+        Artist artist = artistMapper(registerRequest);
+        return artistRepository.save(artist);
     }
 
     @Override
     public void login(LoginRequest loginRequest) {
-     if (!checkIfArtistExist(loginRequest.getUsername())) throw new ArtistExistException("Invalid details");
-     Artist foundArtist = artistRepository.findByUsername(loginRequest.getUsername());
-     if (!foundArtist.getPassword().equals(loginRequest.getPassword()))throw new InvalidDetailsException("Details entered are invalid");
-     foundArtist.setEnable(true);
-     artistRepository.save(foundArtist);
+        if (!checkIfArtistExist(loginRequest.getUsername(), loginRequest.getEmail()))
+            throw new ArtistExistException("Invalid details");
+        Artist foundArtist = findArtist(loginRequest.getUsername());
+        if (!foundArtist.getPassword().equals(loginRequest.getPassword()))
+            throw new InvalidDetailsException("Details entered are invalid");
+        foundArtist.setEnable(true);
+        artistRepository.save(foundArtist);
     }
 
     @Override
     public void displayArt(DisplayArtRequest displayArtRequest) {
-        if (!checkIfArtistExist(displayArtRequest.getArtistUsername())) throw new ArtistExistException("Artist does not exist");
-       Artist foundArtist = findArtist(displayArtRequest.getArtistUsername());
-       if (!foundArtist.isEnable()) throw new InvalidLoginDetail("User have not login");
-       Art art = artService.create(displayArtRequest, foundArtist);
-       List<Art> artList = foundArtist.getArtList();
-       artList.add(art);
-       foundArtist.setArtList(artList);
-       artistRepository.save(foundArtist);
+        if (!checkIfArtistExist(displayArtRequest.getArtistUsername(), displayArtRequest.getEmail()))
+            throw new ArtistExistException("Artist does not exist");
+        Artist foundArtist = findArtist(displayArtRequest.getArtistUsername());
+        if (!foundArtist.isEnable()) throw new InvalidLoginDetail("User have not login");
+        Art art = artService.create(displayArtRequest, foundArtist);
+        List<Art> artList = foundArtist.getArtList();
+        artList.add(art);
+        foundArtist.setArtList(artList);
+        artistRepository.save(foundArtist);
         EmailRequest emailRequest = new EmailRequest();
         emailRequest.setSenderEmail(foundArtist.getEmail());
         emailRequest.setTitle("Request to display Art");
-        emailRequest.setMessage(String.format("Art proposal %n"+
-                "Art name: %s%nArt description: %s%nArt Price: %s%nArt Id: %s%nArtist Username:%s",
+        emailRequest.setMessage(String.format("Art proposal %n" +
+                        "Art name: %s%nArt description: %s%nArt Price: %s%nArt Id: %s%nArtist Username:%s",
                 art.getName(), art.getDescription(), art.getPrice(), art.getId(), art.getArtist().getUsername()));
         emailRequest.setReceiverEmail(ADMIN_EMAIL);
         emailService.sendMailMessage(emailRequest);
     }
 
     @Override
-    public List<Art> findAllArt(String username) {
-        if (!checkIfArtistExist(username)) throw new ArtistExistException("Artist does not exist");
+    public List<Art> findAllArt(String username, String email) {
+        if (!checkIfArtistExist(username, email)) throw new ArtistExistException("Artist does not exist");
         Artist foundArtist = findArtist(username);
         if (!foundArtist.isEnable()) throw new InvalidLoginDetail("Unauthorized request due to invalid login");
         return foundArtist.getArtList();
     }
 
     private Artist findArtist(String artistUsername) {
-        return artistRepository.findByUsername(artistUsername);
+        return artistRepository.findByUsername(artistUsername).get();
     }
 
-    public  void  validations(RegisterRequest registerRequest){
-         if (!Validator.validateName(registerRequest.getUsername())) throw new InvalidUsernameException("Invalid username");
-         if (!Validator.validatePassword(registerRequest.getPassword())) throw new InvalidPasswordException("Invalid password");
-         if (!Validator.validateEmail(registerRequest.getEmail())) throw new InvalidEmailException("Invalid Email");
-     }
-    public boolean checkIfArtistExist(String artistUsername){
-        Artist artist = findArtist(artistUsername);
-        if (artist == null) {
-            return false;
-        }
-        else return true;
-
+    public void validations(RegisterRequest registerRequest) {
+        if (!Validator.validateName(registerRequest.getUsername()))
+            throw new InvalidUsernameException("Invalid username");
+        if (!Validator.validatePassword(registerRequest.getPassword()))
+            throw new InvalidPasswordException("Invalid password");
+        if (!Validator.validateEmail(registerRequest.getEmail())) throw new InvalidEmailException("Invalid Email");
     }
+
+    public boolean checkIfArtistExist(String artistUsername, String email) {
+        return artistRepository.findByUsername(artistUsername).isPresent() && artistRepository.findByEmail(email).isPresent();
+    }
+
     @Override
     public Art findAArt(FindAArtRequest findAArtRequest) {
         Optional<Artist> artist = artistRepository.findByEmail(findAArtRequest.getEmail());

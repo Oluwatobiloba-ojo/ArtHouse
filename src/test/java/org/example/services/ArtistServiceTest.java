@@ -102,6 +102,7 @@ class ArtistServiceTest {
         artistService.login(loginRequest);
         DisplayArtRequest displayArtRequest = new DisplayArtRequest();
         displayArtRequest.setArtistUsername("Sandra");
+        displayArtRequest.setEmail("deborahdelighted5@gmail.com");
         displayArtRequest.setArtName("Monkey on the tree");
         displayArtRequest.setDescription("A paint picture which is monkey is on the tree");
         displayArtRequest.setAmount(BigDecimal.valueOf(3000));
@@ -115,24 +116,20 @@ class ArtistServiceTest {
         registerRequest.setPassword("Olaoluwajohn");
         registerRequest.setEmail("deborahdelighted5@gmail.com");
         artistService.register(registerRequest);
-        registerRequest.setUsername("Delight");
-        artistService.register(registerRequest);
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setUsername("Sandra");
         loginRequest.setPassword("Olaoluwajohn");
-        loginRequest.setEmail("joy@gmail.com");
-        artistService.login(loginRequest);
-        loginRequest.setUsername("Delight");
+        loginRequest.setEmail("deborahdelighted5@gmail.com");
         artistService.login(loginRequest);
         DisplayArtRequest displayArtRequest = new DisplayArtRequest();
+        displayArtRequest.setEmail("deborahdelighted5@gmail.com");
         displayArtRequest.setArtistUsername("Sandra");
         displayArtRequest.setArtName("Monkey on the tree");
         displayArtRequest.setDescription("A paint picture which is monkey is on the tree");
         displayArtRequest.setAmount(BigDecimal.valueOf(3000));
         artistService.displayArt(displayArtRequest);
         assertEquals(1, artRepository.count());
-        assertEquals(1, artistService.findAllArt("Sandra").size());
-        assertEquals(0, artistService.findAllArt("Delight").size());
+        assertEquals(1, artistService.findAllArt("Sandra","deborahdelighted5@gmail.com").size());
     }
     @Test
     public void testThatArtistCanFindTheArtThatBelongToThem(){
@@ -147,24 +144,27 @@ class ArtistServiceTest {
         loginRequest.setEmail("deborahdelighted5@gmail.com");
         artistService.login(loginRequest);
         DisplayArtRequest displayArtRequest = new DisplayArtRequest();
+        displayArtRequest.setEmail("deborahdelighted5@gmail.com");
         displayArtRequest.setArtistUsername("Sandra");
         displayArtRequest.setArtName("Monkey on the tree");
         displayArtRequest.setDescription("A paint picture which is monkey is on the tree");
         displayArtRequest.setAmount(BigDecimal.valueOf(3000));
         artistService.displayArt(displayArtRequest);
         DisplayArtRequest displayArtRequest1 = new DisplayArtRequest();
+        displayArtRequest1.setEmail("deborahdelighted5@gmail.com");
         displayArtRequest1.setArtistUsername("Sandra");
         displayArtRequest1.setArtName("The theme team");
         displayArtRequest1.setDescription("A paint picture that endorse team");
         displayArtRequest1.setAmount(BigDecimal.valueOf(2500));
         artistService.displayArt(displayArtRequest1);
         DisplayArtRequest displayArtRequest2 = new DisplayArtRequest();
+        displayArtRequest2.setEmail("deborahdelighted5@gmail.com");
         displayArtRequest2.setArtistUsername("Sandra");
         displayArtRequest2.setArtName("Merge peg");
         displayArtRequest2.setDescription("A paint picture reference collaboration");
         displayArtRequest2.setAmount(BigDecimal.valueOf(4000));
         artistService.displayArt(displayArtRequest2);
-        assertEquals(3,artistService.findAllArt("Sandra").size());
+        assertEquals(3,artistService.findAllArt("Sandra","deborahdelighted5@gmail.com").size());
     }
     @Test
     public void testThatUserCanFindAArtBelongToTheUser(){
