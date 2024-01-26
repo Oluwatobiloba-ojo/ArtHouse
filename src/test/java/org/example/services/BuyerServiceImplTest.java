@@ -129,7 +129,7 @@ public class BuyerServiceImplTest {
         displayArtRequest2.setAmount(BigDecimal.valueOf(4000));
         artistService.displayArt(displayArtRequest2);
         assertEquals(3, artistService.findAllArt("Iyanu").size());
-        assertEquals(3, buyerService.viewAllPublishedArt("joy@gmail.com").size());
+        assertEquals(3, buyerService.viewAllPublishedArt("joy@gmail.com","joy@gmail.com").size());
 
     }
 }

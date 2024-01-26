@@ -34,7 +34,7 @@ public class ArtistServiceImpl implements ArtistService{
 
     @Override
     public void login(LoginRequest loginRequest) {
-     if (!checkIfArtistExist(loginRequest.getUsername())) throw new ArtistExistException("Artist May Not exist");
+     if (!checkIfArtistExist(loginRequest.getUsername())) throw new ArtistExistException("Invalid details");
      Artist foundArtist = artistRepository.findByUsername(loginRequest.getUsername());
      if (!foundArtist.getPassword().equals(loginRequest.getPassword()))throw new InvalidDetailsException("Details entered are invalid");
      foundArtist.setEnable(true);
@@ -47,7 +47,6 @@ public class ArtistServiceImpl implements ArtistService{
        Artist foundArtist = findArtist(displayArtRequest.getArtistUsername());
        if (!foundArtist.isEnable()) throw new InvalidLoginDetail("User have not login");
        Art art = artService.create(displayArtRequest, foundArtist);
-       art.setPublished(true);
        List<Art> artList = foundArtist.getArtList();
        artList.add(art);
        foundArtist.setArtList(artList);

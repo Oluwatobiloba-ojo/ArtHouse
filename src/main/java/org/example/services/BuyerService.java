@@ -10,8 +10,8 @@ import org.example.dto.request.LoginRequest;
 import org.example.dto.request.RegisterRequest;
 
 public interface BuyerService {
-    List<Art> viewAllPublishedArt(String email);
-    Buyer findBuyerByEmail(String email);
+    List<Art> viewAllPublishedArt(String buyerName,String email);
+//    Buyer findBuyerByEmail(String email);
 
     Buyer register(RegisterRequest registerRequest);
 

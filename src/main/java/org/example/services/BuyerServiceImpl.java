@@ -29,8 +29,8 @@ public class BuyerServiceImpl implements BuyerService {
 
     @Override
     public Buyer register(RegisterRequest registerRequest) {
-        if (checkIfBuyerExist(registerRequest.getUsername()))
-            throw new BuyerExistException("Buyer already exist\t" + registerRequest.getUsername());
+        if (checkIfBuyerExist(registerRequest.getUsername(), registerRequest.getEmail()))
+            throw new BuyerExistException("User already exist");
         validations(registerRequest);
         Buyer buyer = buyerMapper(registerRequest);
         return buyerRepository.save(buyer);
@@ -38,21 +38,21 @@ public class BuyerServiceImpl implements BuyerService {
 
     @Override
     public void login(LoginRequest loginRequest) {
-        Buyer foundBuyer = buyerRepository.findByUsername(loginRequest.getUsername());
-        if (!checkIfBuyerExist(loginRequest.getUsername())) {
-            throw new BuyerExistException("Buyer May Not exist");
+        Optional<Buyer> foundBuyer = buyerRepository.findByUsername(loginRequest.getUsername());
+        if (!checkIfBuyerExist(loginRequest.getUsername(), loginRequest.getEmail())) {
+            throw new BuyerExistException("Invalid details");
         }
-        if (!foundBuyer.getUsername().equalsIgnoreCase(loginRequest.getUsername())) {
+        if (!foundBuyer.get().getUsername().equalsIgnoreCase(loginRequest.getUsername())) {
             throw new InvalidDetailsException("Details entered are invalid");
         }
-        if (!foundBuyer.getPassword().equalsIgnoreCase(loginRequest.getPassword())) {
+        if (!foundBuyer.get().getPassword().equalsIgnoreCase(loginRequest.getPassword())) {
             throw new InvalidDetailsException("Details entered are invalid");
         }
-        if (!foundBuyer.getEmail().equalsIgnoreCase(loginRequest.getEmail())) {
+        if (!foundBuyer.get().getEmail().equalsIgnoreCase(loginRequest.getEmail())) {
             throw new InvalidDetailsException("Details entered are invalid");
         }
-        foundBuyer.setEnable(false);
-        buyerRepository.save(foundBuyer);
+        foundBuyer.get().setEnable(false);
+        buyerRepository.save(foundBuyer.get());
     }
 
     public void validations(RegisterRequest registerRequest) {
@@ -67,36 +67,34 @@ public class BuyerServiceImpl implements BuyerService {
         }
     }
 
-    public boolean checkIfBuyerExist(String buyerName) {
-        Buyer buyer = buyerRepository.findByUsername(buyerName);
-        if (buyer == null) {
-            return false;
-        } else return true;
+    public boolean checkIfBuyerExist(String buyerName, String email) {
+        return buyerRepository.findByUsername(buyerName).isPresent() && buyerRepository.findByEmail(email).isPresent();
     }
 
     @Override
-    public List<Art> viewAllPublishedArt(String email) {
+    public List<Art> viewAllPublishedArt(String buyerName, String email) {
         ArrayList<Art> publishedArts = new ArrayList<>();
-        validateBuyer(email);
-        for (Art art : artService.findAllArt()) {
-            if (art.isPublished()) {
-                publishedArts.add(art);
+        if (checkIfBuyerExist(buyerName, email)) {
+            for (Art art : artService.findAllArt()) {
+                if (art.isPublished()) {
+                    publishedArts.add(art);
+                }
             }
         }
-
         return publishedArts;
+
     }
 
-    @Override
-    public Buyer findBuyerByEmail(String email) {
-        validateBuyer(email);
-        return null;
-    }
+//    @Override
+//    public Buyer findBuyerByEmail(String email) {
+//        validateBuyer(email);
+//        return null;
+//    }
 
-    private void validateBuyer(String email) {
-        Optional<Buyer> buyer = buyerRepository.findByEmail(email);
-        if (buyer.isEmpty()) {
-            throw new BuyerExistException("Account doesnt exist");
-        }
-    }
+//    private void validateBuyer(String email) {
+//        Optional<Buyer> buyer = buyerRepository.findByEmail(email);
+//        if (buyer.isEmpty()) {
+//            throw new BuyerExistException("Account doesnt exist");
+//        }
+//    }
 }
