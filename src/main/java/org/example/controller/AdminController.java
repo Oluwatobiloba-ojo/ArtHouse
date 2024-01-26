@@ -30,8 +30,8 @@ public class AdminController {
         }
     }
 
-    @DeleteMapping("Admin/remove-artist{username/email}")
-    public ResponseEntity<?> removeArtist(@PathVariable String username, String email){
+    @DeleteMapping("Admin/remove-artist{username}/{email}")
+    public ResponseEntity<?> removeArtist(@PathVariable String username,  @PathVariable String email){
         ArtistResponse removeArtistResponse = new ArtistResponse();
 
         try {

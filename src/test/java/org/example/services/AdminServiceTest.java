@@ -41,7 +41,7 @@ public class AdminServiceTest {
         DisplayArtRequest displayArtRequest = artRequest("Art", BigDecimal.valueOf(1000), "usernames", "An art");
         artistService.displayArt(displayArtRequest);
 
-        UploadRequest uploadRequest = requestUpload(1, 1, "veraba@gmail.com");
+        UploadRequest uploadRequest = requestUpload( 1, "veraba@gmail.com");
         art = adminService.uploadArt(uploadRequest);
 
         assertTrue(art.isPublished());
@@ -95,9 +95,8 @@ public class AdminServiceTest {
 
     }
 
-    private UploadRequest requestUpload(long artistId, long artId, String email) {
+    private UploadRequest requestUpload(long artId, String email) {
         UploadRequest uploadRequest = new UploadRequest();
-        uploadRequest.setArtistId(artistId);
         uploadRequest.setArtId(artId);
         uploadRequest.setEmail(email);
         return uploadRequest;

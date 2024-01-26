@@ -23,6 +23,7 @@ public class AdminServiceImpl implements AdminService{
 
         Art art = artService.findArt(uploadRequest.getArtId());
         if (art == null) throw new ArtNotFound("Art belonging to this id not found");
+
         art.setPublished(true);
 
         return art;
@@ -32,8 +33,7 @@ public class AdminServiceImpl implements AdminService{
     public void removeArtist(String username, String email) {
         Artist artist = artistService.findArtist(username);
         if (artist == null) throw new UserNotFound("Error! Artist with this email is not found");
+
         artistService.remove(username, email);
     }
-
-
 }
