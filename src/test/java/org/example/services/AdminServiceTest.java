@@ -4,10 +4,7 @@ import org.example.data.model.Art;
 import org.example.data.model.Artist;
 import org.example.data.repository.ArtRepository;
 import org.example.data.repository.ArtistRepository;
-import org.example.dto.request.DisplayArtRequest;
-import org.example.dto.request.LoginRequest;
-import org.example.dto.request.RegisterRequest;
-import org.example.dto.request.UploadRequest;
+import org.example.dto.request.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -41,8 +38,9 @@ public class AdminServiceTest {
         DisplayArtRequest displayArtRequest = artRequest("Art", BigDecimal.valueOf(1000), "usernames", "An art");
         artistService.displayArt(displayArtRequest);
 
+        AdminRequest adminRequest = adminRequest("admin@gmail.com", "admin12");
         UploadRequest uploadRequest = requestUpload( 1, "veraba@gmail.com");
-        art = adminService.uploadArt(uploadRequest);
+        art = adminService.uploadArt(adminRequest, uploadRequest);
 
         assertTrue(art.isPublished());
     }
@@ -56,7 +54,10 @@ public class AdminServiceTest {
         LoginRequest loginRequest = loginRequest("username", "password1", "email@gmail.com");
         artistService.login(loginRequest);
 
-        adminService.removeArtist("username", "email@gmail.com");
+        AdminRequest adminRequest = adminRequest("admin@gmail.com", "admin12");
+        RemoveArtistRequest removeArtistRequest = removeArtistRequest("username", "email@gmail.com");
+
+        adminService.removeArtist(adminRequest, removeArtistRequest);
         assertEquals(0, artistRepository.count());
     }
 
@@ -89,7 +90,10 @@ public class AdminServiceTest {
         assertEquals(4, artRepository.findArtsByArtist_Email("vera@gmail.com").size());
         assertEquals(1, artRepository.findArtsByArtist_Email("susan@gmail.com").size());
 
-        adminService.removeArtist("vera", "vera@gmail.com");
+        AdminRequest adminRequest = adminRequest("admin@gmail.com", "admin12");
+        RemoveArtistRequest removeArtistRequest = removeArtistRequest("vera", "vera@gmail.com");
+
+        adminService.removeArtist(adminRequest, removeArtistRequest);
         assertEquals(0, artRepository.findArtsByArtist_Email("vera@gmail.com").size());
         assertEquals(1, artRepository.findArtsByArtist_Email("susan@gmail.com").size());
 
@@ -126,5 +130,19 @@ public class AdminServiceTest {
         loginRequest.setPassword(password);
         loginRequest.setEmail(email);
         return loginRequest;
+    }
+
+    private AdminRequest adminRequest(String email, String password){
+        AdminRequest adminRequest = new AdminRequest();
+        adminRequest.setEmail(email);
+        adminRequest.setPassword(password);
+        return adminRequest;
+    }
+
+    private RemoveArtistRequest removeArtistRequest(String username, String email){
+        RemoveArtistRequest removeArtistRequest = new RemoveArtistRequest();
+        removeArtistRequest.setUsername(username);
+        removeArtistRequest.setEmail(email);
+        return removeArtistRequest;
     }
 }

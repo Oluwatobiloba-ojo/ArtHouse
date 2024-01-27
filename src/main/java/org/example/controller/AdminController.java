@@ -1,5 +1,7 @@
 package org.example.controller;
 
+import org.example.dto.request.AdminRequest;
+import org.example.dto.request.RemoveArtistRequest;
 import org.example.dto.request.UploadRequest;
 import org.example.dto.response.ApiResponse;
 import org.example.dto.response.ArtistResponse;
@@ -16,11 +18,11 @@ public class AdminController {
     private AdminService adminService;
 
     @PostMapping("Admin/upload-art")
-    public ResponseEntity<?> uploadArt(@RequestBody UploadRequest uploadRequest){
+    public ResponseEntity<?> uploadArt(@RequestBody AdminRequest adminRequest, UploadRequest uploadRequest){
         UploadResponse uploadResponse = new UploadResponse();
 
         try {
-            adminService.uploadArt(uploadRequest);
+            adminService.uploadArt(adminRequest, uploadRequest);
             uploadResponse.setMessage("Art with Id " + uploadRequest.getArtId() + "displayed by artist with Id " + uploadRequest.getArtistId() + "has been uploaded successfully");
             return new ResponseEntity<>(new ApiResponse(true,uploadResponse), HttpStatus.ACCEPTED);
         }
@@ -30,13 +32,13 @@ public class AdminController {
         }
     }
 
-    @DeleteMapping("Admin/remove-artist{username}/{email}")
-    public ResponseEntity<?> removeArtist(@PathVariable String username,  @PathVariable String email){
+    @DeleteMapping("Admin/remove-artist")
+    public ResponseEntity<?> removeArtist(@RequestBody AdminRequest adminRequest, RemoveArtistRequest removeArtistRequest){
         ArtistResponse removeArtistResponse = new ArtistResponse();
 
         try {
-            adminService.removeArtist(username, email);
-            removeArtistResponse.setMessage(username + " and all his/her arts has been removed from Art House");
+            adminService.removeArtist(adminRequest, removeArtistRequest);
+            removeArtistResponse.setMessage(removeArtistRequest.getUsername() + " and all his/her arts has been removed from Art House");
             return new ResponseEntity<>(new ApiResponse(true,removeArtistResponse), HttpStatus.ACCEPTED);
         }
         catch (Exception exception){

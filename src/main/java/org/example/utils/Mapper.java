@@ -1,5 +1,6 @@
 package org.example.utils;
 
+import org.example.data.model.Admin;
 import org.example.data.model.Art;
 import org.example.data.model.Artist;
 import org.example.data.model.Buyer;
@@ -38,5 +39,12 @@ public class Mapper {
         art.setName(name);
         art.setId(id);
         return art;
+    }
+
+    public static Admin mapAdmin(String email, String password){
+        Admin admin = new Admin();
+        admin.setEmail("admin@gmail.com");
+        admin.setPassword("admin12");
+        return admin;
     }
 }
