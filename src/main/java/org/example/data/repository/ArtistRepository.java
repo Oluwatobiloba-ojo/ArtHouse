@@ -4,5 +4,7 @@ import org.example.data.model.Artist;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ArtistRepository extends JpaRepository<Artist, Long> {
-    Artist findByUsername(String email);
+    Artist findArtistByEmail(String email);
+
+    Artist findByUsername(String artistName);
 }

@@ -22,9 +22,10 @@ public class ArtistServiceImpl implements ArtistService{
     @Autowired
     private ArtistRepository artistRepository;
     @Autowired
-    private ArtService artService;
+    ArtService artService;
     @Autowired
-    private EmailService emailService;
+    EmailService emailService;
+
     @Override
     public Artist register(RegisterRequest registerRequest) {
      if (checkIfArtistExist(registerRequest.getUsername())) throw new ArtistExistException("Artist already exist\t"+ registerRequest.getUsername());
@@ -69,8 +70,8 @@ public class ArtistServiceImpl implements ArtistService{
         if (!foundArtist.isEnable()) throw new InvalidLoginDetail("Unauthorized request due to invalid login");
         return foundArtist.getArtList();
     }
-
-    private Artist findArtist(String artistUsername) {
+    @Override
+    public Artist findArtist(String artistUsername) {
         return artistRepository.findByUsername(artistUsername);
     }
 
@@ -82,7 +83,23 @@ public class ArtistServiceImpl implements ArtistService{
     public boolean checkIfArtistExist(String artistUsername){
         Artist artist = findArtist(artistUsername);
         if (artist == null) {
-            return false;}
-        else return true;
+            return false;
+        } else return true;
+    }
+    @Override
+    public void remove(String username, String email) {
+        List<Art> arts = findAllArt(username);
+        artService.delete(arts);
+
+        Artist artist = artistRepository.findArtistByEmail(email);
+        if (artist == null) throw new UserNotFound("Error! Artist with this email is not found");
+
+        artistRepository.delete(artist);
+    }
+
+    @Override
+    public Artist findArtistEmail(String email) {
+        return artistRepository.findArtistByEmail(email);
     }
 }
+
