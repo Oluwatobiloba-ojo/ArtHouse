@@ -21,10 +21,30 @@ public class ArtServiceImpl implements ArtService {
         save(art);
         return art;
     }
-
     @Override
     public void save(Art art) {
         artRepository.save(art);
+    }
+
+    @Override
+    public void delete(List<Art> arts) {
+        artRepository.deleteAll(arts);
+    }
+
+    @Override
+    public Art findArt(long artId) {
+        Art art = artRepository.findArtById(artId);
+        return art;
+    }
+
+    @Override
+    public Long count() {
+        return artRepository.count();
+    }
+
+    @Override
+    public List<Art> findArtsBelongingTo(String email) {
+        return artRepository.findArtsByArtist_Email(email);
     }
 
     @Override
