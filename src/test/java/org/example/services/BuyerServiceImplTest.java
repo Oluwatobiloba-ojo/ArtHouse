@@ -1,10 +1,10 @@
 package org.example.services;
 
+import org.example.data.model.Art;
+import org.example.data.model.Artist;
 import org.example.data.repository.ArtistRepository;
 import org.example.data.repository.BuyerRepository;
-import org.example.dto.request.DisplayArtRequest;
-import org.example.dto.request.LoginRequest;
-import org.example.dto.request.RegisterRequest;
+import org.example.dto.request.*;
 import org.example.exceptions.BuyerExistException;
 import org.example.exceptions.InvalidEmailException;
 import org.example.exceptions.InvalidPasswordException;
@@ -21,6 +21,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 public class BuyerServiceImplTest {
+    @Autowired
+    private AdminService adminService;
     @Autowired
     private BuyerService buyerService;
     @Autowired
@@ -109,28 +111,46 @@ public class BuyerServiceImplTest {
         loginRequestArtist.setUsername("Iyanu");
         loginRequestArtist.setPassword("Olaoluwajohn");
         loginRequestArtist.setEmail("deborahdelighted5@gmail.com");
-        artistService.login(loginRequestArtist);
+        Artist artist = artistService.login(loginRequestArtist);
         DisplayArtRequest displayArtRequest = new DisplayArtRequest();
         displayArtRequest.setArtistUsername("Iyanu");
         displayArtRequest.setEmail("deborahdelighted5@gmail.com");
         displayArtRequest.setArtName("Monkey on the tree");
         displayArtRequest.setDescription("A paint picture which is monkey is on the tree");
         displayArtRequest.setAmount(BigDecimal.valueOf(3000));
-        artistService.displayArt(displayArtRequest);
+       Art art = artistService.displayArt(displayArtRequest);
+        AdminRequest adminRequest = new AdminRequest();
+        adminRequest.setEmail("admin@gmail.com");
+        adminRequest.setPassword("admin12");
+        UploadRequest uploadRequest = new UploadRequest();
+        uploadRequest.setArtId(art.getId());
+        uploadRequest.setEmail("deborahdelighted5@gmail.com");
+        uploadRequest.setArtistId(artist.getId());
+        adminService.uploadArt(adminRequest,uploadRequest);
         DisplayArtRequest displayArtRequest1 = new DisplayArtRequest();
         displayArtRequest1.setEmail("deborahdelighted5@gmail.com");
         displayArtRequest1.setArtistUsername("Iyanu");
         displayArtRequest1.setArtName("The theme team");
         displayArtRequest1.setDescription("A paint picture that endorse team");
         displayArtRequest1.setAmount(BigDecimal.valueOf(2500));
-        artistService.displayArt(displayArtRequest1);
+        Art art1 = artistService.displayArt(displayArtRequest1);
+        UploadRequest uploadRequest1 = new UploadRequest();
+        uploadRequest1.setArtId(art1.getId());
+        uploadRequest1.setEmail("deborahdelighted5@gmail.com");
+        uploadRequest1.setArtistId(artist.getId());
+        adminService.uploadArt(adminRequest,uploadRequest1);
         DisplayArtRequest displayArtRequest2 = new DisplayArtRequest();
         displayArtRequest2.setEmail("deborahdelighted5@gmail.com");
         displayArtRequest2.setArtistUsername("Iyanu");
         displayArtRequest2.setArtName("Merge peg");
         displayArtRequest2.setDescription("A paint picture reference collaboration");
         displayArtRequest2.setAmount(BigDecimal.valueOf(4000));
-        artistService.displayArt(displayArtRequest2);
+        Art art2 = artistService.displayArt(displayArtRequest2);
+        UploadRequest uploadRequest2 = new UploadRequest();
+        uploadRequest2.setArtId(art2.getId());
+        uploadRequest2.setEmail("deborahdelighted5@gmail.com");
+        uploadRequest2.setArtistId(artist.getId());
+        adminService.uploadArt(adminRequest,uploadRequest2);
         assertEquals(3, artistService.findAllArt("Iyanu","deborahdelighted5@gmail.com").size());
         assertEquals(3, buyerService.viewAllPublishedArt("Sandra","joy@gmail.com").size());
 

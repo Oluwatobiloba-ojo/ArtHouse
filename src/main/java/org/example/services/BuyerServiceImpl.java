@@ -74,27 +74,22 @@ public class BuyerServiceImpl implements BuyerService {
     @Override
     public List<Art> viewAllPublishedArt(String buyerName, String email) {
         ArrayList<Art> publishedArts = new ArrayList<>();
-        if (checkIfBuyerExist(buyerName, email)) {
-            for (Art art : artService.findAllArt()) {
-                if (art.isPublished()) {
-                    publishedArts.add(art);
-                }
+        validateBuyer(email);
+        for (Art art : artService.findAllArt()) {
+            if (art.isPublished()) {
+                publishedArts.add(art);
             }
         }
+
         return publishedArts;
 
     }
 
-//    @Override
-//    public Buyer findBuyerByEmail(String email) {
-//        validateBuyer(email);
-//        return null;
-//    }
 
-//    private void validateBuyer(String email) {
-//        Optional<Buyer> buyer = buyerRepository.findByEmail(email);
-//        if (buyer.isEmpty()) {
-//            throw new BuyerExistException("Account doesnt exist");
-//        }
-//    }
+    private void validateBuyer(String email) {
+        Optional<Buyer> buyer = buyerRepository.findByEmail(email);
+        if (buyer.isEmpty()) {
+            throw new BuyerExistException("Account doesnt exist");
+        }
+    }
 }
