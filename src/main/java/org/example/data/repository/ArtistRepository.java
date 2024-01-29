@@ -3,8 +3,11 @@ package org.example.data.repository;
 import org.example.data.model.Artist;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ArtistRepository extends JpaRepository<Artist, Long> {
-    Artist findArtistByEmail(String email);
+import java.util.Optional;
 
-    Artist findByUsername(String artistName);
+public interface ArtistRepository extends JpaRepository<Artist, Long> {
+
+    Optional<Artist> findByEmail(String email);
+
+    Optional<Artist> findByUsername(String artistName);
 }

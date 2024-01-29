@@ -5,6 +5,7 @@ import org.example.data.model.Artist;
 import org.example.data.repository.ArtRepository;
 import org.example.data.repository.ArtistRepository;
 import org.example.dto.request.*;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,9 +26,15 @@ public class AdminServiceTest {
     @Autowired
     ArtRepository artRepository;
 
+    @AfterEach
+    public void deleteBeforeTest() {
+        artistRepository.deleteAll();
+        artRepository.deleteAll();
+    }
+
 
     @Test
-    void adminCanUploadArtDisplayedByArtistWithValidArtId(){
+    void adminCanUploadArtDisplayedByArtistWithValidArtId() {
         RegisterRequest registerRequest = request("usernames", "password123", "veraba@gmail.com");
         artistService.register(registerRequest);
 
@@ -35,18 +42,18 @@ public class AdminServiceTest {
         artistService.login(loginRequest);
 
         Art art;
-        DisplayArtRequest displayArtRequest = artRequest("Art", BigDecimal.valueOf(1000), "usernames", "An art");
+        DisplayArtRequest displayArtRequest = artRequest("Art", BigDecimal.valueOf(1000), "usernames", "An art", "veraba@gmail.com");
         artistService.displayArt(displayArtRequest);
 
         AdminRequest adminRequest = adminRequest("admin@gmail.com", "admin12");
-        UploadRequest uploadRequest = requestUpload( 1, "veraba@gmail.com");
+        UploadRequest uploadRequest = requestUpload(1, "veraba@gmail.com");
         art = adminService.uploadArt(adminRequest, uploadRequest);
 
         assertTrue(art.isPublished());
     }
 
     @Test
-    void adminCanRemoveArtist(){
+    void adminCanRemoveArtist() {
         RegisterRequest registerRequest1 = request("username", "password1", "email@gmail.com");
         artistService.register(registerRequest1);
         assertEquals(1, artistRepository.count());
@@ -62,7 +69,7 @@ public class AdminServiceTest {
     }
 
     @Test
-    void  allArtsByAnArtistAreRemovedWhenTheArtistIsRemoved(){
+    void allArtsByAnArtistAreRemovedWhenTheArtistIsRemoved() {
         RegisterRequest registerRequest12 = request("vera", "password12", "vera@gmail.com");
         artistService.register(registerRequest12);
         RegisterRequest registerRequest13 = request("susan", "password13", "susan@gmail.com");
@@ -72,7 +79,7 @@ public class AdminServiceTest {
         LoginRequest loginRequest = loginRequest("vera", "password12", "vera@gmail.com");
         artistService.login(loginRequest);
 
-        DisplayArtRequest displayArtRequest = artRequest("Art", BigDecimal.valueOf(1000), "vera", "An artwork");
+        DisplayArtRequest displayArtRequest = artRequest("Art", BigDecimal.valueOf(1000), "vera", "An artwork", "vera@gmail.com");
         artistService.displayArt(displayArtRequest);
         displayArtRequest.setArtName("Monkey");
         artistService.displayArt(displayArtRequest);
@@ -84,7 +91,7 @@ public class AdminServiceTest {
         LoginRequest loginRequest2 = loginRequest("susan", "password13", "susan@gmail.com");
         artistService.login(loginRequest2);
 
-        DisplayArtRequest displayArtRequest2 = artRequest("lily", BigDecimal.valueOf(1000), "susan", "painting");
+        DisplayArtRequest displayArtRequest2 = artRequest("lily", BigDecimal.valueOf(1000), "susan", "painting", "susan@gmail.com");
         artistService.displayArt(displayArtRequest2);
 
         assertEquals(4, artRepository.findArtsByArtist_Email("vera@gmail.com").size());
@@ -114,17 +121,18 @@ public class AdminServiceTest {
         return registerRequest;
     }
 
-    private DisplayArtRequest artRequest(String artName, BigDecimal amount, String artistUsername,String description){
+    private DisplayArtRequest artRequest(String artName, BigDecimal amount, String artistUsername, String description, String email) {
         DisplayArtRequest displayArtRequest = new DisplayArtRequest();
         displayArtRequest.setArtName(artName);
         displayArtRequest.setAmount(amount);
+        displayArtRequest.setEmail(email);
         displayArtRequest.setArtistUsername(artistUsername);
         displayArtRequest.setDescription(description);
 
         return displayArtRequest;
     }
 
-    private LoginRequest loginRequest(String username, String password, String email){
+    private LoginRequest loginRequest(String username, String password, String email) {
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setUsername(username);
         loginRequest.setPassword(password);
@@ -132,14 +140,14 @@ public class AdminServiceTest {
         return loginRequest;
     }
 
-    private AdminRequest adminRequest(String email, String password){
+    private AdminRequest adminRequest(String email, String password) {
         AdminRequest adminRequest = new AdminRequest();
         adminRequest.setEmail(email);
         adminRequest.setPassword(password);
         return adminRequest;
     }
 
-    private RemoveArtistRequest removeArtistRequest(String username, String email){
+    private RemoveArtistRequest removeArtistRequest(String username, String email) {
         RemoveArtistRequest removeArtistRequest = new RemoveArtistRequest();
         removeArtistRequest.setUsername(username);
         removeArtistRequest.setEmail(email);

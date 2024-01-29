@@ -1,23 +1,30 @@
 package org.example.services;
 
-import org.example.data.model.Artist;
-import org.example.dto.request.DisplayArtRequest;
-import org.example.dto.request.LoginRequest;
 import org.example.data.model.Art;
 import org.example.data.model.Artist;
-import org.example.dto.request.RegisterRequest;
+import org.example.dto.request.*;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ArtistService {
-
-
     Artist register(RegisterRequest registerRequest);
-    Artist findArtist(String email);
-    void remove(String username, String email);
-    void  login(LoginRequest loginRequest);
-    void displayArt(DisplayArtRequest displayArtRequest);
-    List<Art> findAllArt(String sandra);
 
-    Artist findArtistEmail(String email);
+    Optional<Artist> findArtist(String email);
+
+    void remove(String username, String email);
+
+    Artist login(LoginRequest loginRequest);
+
+    Art displayArt(DisplayArtRequest displayArtRequest);
+
+    Optional<Artist> findArtistEmail(String email);
+
+    List<Art> findAllArt(String sandra, String email);
+
+    Art findAArt(FindAArtRequest findAArtRequest);
+
+    void removeAArt(RemoveAArtRequest removeAArtRequest);
+
+
 }
