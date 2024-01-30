@@ -65,10 +65,5 @@ public class ArtistController {
         }
     }
 }
-//    register take in RegisterRequest
-//            login LoginRequest
-//                    displayArt DisplayArtRequest
-//                            viewAllArt take in username, email
-//                                findArt take in FindArtRequest
 
 
