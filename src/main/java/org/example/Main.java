@@ -28,4 +28,5 @@ public class Main implements CommandLineRunner {
             admin.setEmail("ojot630@gmail.com");
             adminRepository.save(admin);}
     }
+
 }

@@ -5,8 +5,11 @@ import org.example.data.model.Buyer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface BuyerRepository extends JpaRepository<Buyer, Long> {
 
-    Buyer findByUsername(String buyerName);
+    Optional<Buyer> findByUsername(String buyerName);
+
+    Optional<Buyer> findByEmail(String email);
 }
