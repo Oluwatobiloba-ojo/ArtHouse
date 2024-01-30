@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
+    <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ccd1d79c-847f-4d97-ab7d-8c84e6c0229e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/dto/request/FindByEmail.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/ArtistController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/ArtistController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/services/BuyerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/services/BuyerService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/services/BuyerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/services/BuyerServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/services/BuyerServiceImplTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -24,6 +30,9 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Rebase.Settings">
+    <option name="NEW_BASE" value="main" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -55,7 +64,7 @@
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
     &quot;git-widget-placeholder&quot;: &quot;isreal/branch&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Israel/Documents/demos&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Israel/IdeaProjects/ArtHouse&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -64,6 +73,8 @@
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.25951087&quot;,
+    &quot;settings.build.tools.auto.reload&quot;: &quot;ALL&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;build.tools&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;c26d9e8df0a5def4a35de462e99a24a1&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -79,20 +90,14 @@
       <recent name="org.example.services" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ArtistServiceTest.testThatArtistRegisterWithCorrectInfoReturnsArtistObjects">
-    <configuration name="Validator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.example.utils.Validator" />
-      <module name="ArtHouse" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.example.utils.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.Main (1)">
     <configuration name="ArtistServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ArtHouse" />
       <extension name="coverage">
@@ -108,13 +113,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ArtistServiceTest.testThatArtistCanRegisterAndWhenCheckArtistRepositoryCountIsOne" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ArtistServiceTest.testThatArtistRegisterWithCorrectInfoReturnsArtistObjects" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="BuyerServiceImplTest.testThatAnArtist_CanRegisterWithWrongUsernameThrowsException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ArtHouse" />
       <extension name="coverage">
         <pattern>
@@ -123,40 +122,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="org.example.services" />
-      <option name="MAIN_CLASS_NAME" value="org.example.services.ArtistServiceTest" />
-      <option name="METHOD_NAME" value="testThatArtistRegisterWithCorrectInfoReturnsArtistObjects" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ArtistServiceTest.testThatWhenArtistRegisterWithWrongEmailThrowsException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ArtHouse" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.example.services.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.example.services" />
-      <option name="MAIN_CLASS_NAME" value="org.example.services.ArtistServiceTest" />
-      <option name="METHOD_NAME" value="testThatWhenArtistRegisterWithWrongEmailThrowsException" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ArtistServiceTest.testWhenArtistRegisterWithWrongPasswordThrowsException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ArtHouse" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.example.services.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.example.services" />
-      <option name="MAIN_CLASS_NAME" value="org.example.services.ArtistServiceTest" />
-      <option name="METHOD_NAME" value="testWhenArtistRegisterWithWrongPasswordThrowsException" />
+      <option name="MAIN_CLASS_NAME" value="org.example.services.BuyerServiceImplTest" />
+      <option name="METHOD_NAME" value="testThatAnArtist_CanRegisterWithWrongUsernameThrowsException" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -178,6 +145,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Main (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="ArtHouse" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.Main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <method v="2">
         <option name="Make" enabled="true" />
@@ -185,14 +175,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Spring Boot.Main (1)" />
+        <item itemvalue="JUnit.ArtistServiceTest" />
+        <item itemvalue="JUnit.BuyerServiceImplTest.testThatAnArtist_CanRegisterWithWrongUsernameThrowsException" />
         <item itemvalue="JUnit.BuyerServiceImplTest.testThatBuyerCanViewAllArt" />
         <item itemvalue="Spring Boot.Main" />
-        <item itemvalue="JUnit.ArtistServiceTest.testThatArtistCanRegisterAndWhenCheckArtistRepositoryCountIsOne" />
-        <item itemvalue="JUnit.ArtistServiceTest.testThatArtistRegisterWithCorrectInfoReturnsArtistObjects" />
-        <item itemvalue="JUnit.ArtistServiceTest.testWhenArtistRegisterWithWrongPasswordThrowsException" />
-        <item itemvalue="JUnit.ArtistServiceTest.testThatWhenArtistRegisterWithWrongEmailThrowsException" />
-        <item itemvalue="Application.Validator" />
-        <item itemvalue="JUnit.ArtistServiceTest" />
       </list>
     </recent_temporary>
   </component>
@@ -211,6 +198,31 @@
       <workItem from="1705996731829" duration="1310000" />
       <workItem from="1706012325026" duration="2079000" />
       <workItem from="1706015458890" duration="296000" />
+      <workItem from="1706026437159" duration="178000" />
+      <workItem from="1706029857310" duration="3370000" />
+      <workItem from="1706096739355" duration="1814000" />
+      <workItem from="1706132630801" duration="2331000" />
+      <workItem from="1706289910130" duration="17000" />
+      <workItem from="1706355228493" duration="564000" />
+      <workItem from="1706355915909" duration="786000" />
+      <workItem from="1706356723401" duration="123000" />
+      <workItem from="1706363611970" duration="711000" />
+      <workItem from="1706365420318" duration="872000" />
+      <workItem from="1706368174135" duration="3667000" />
+      <workItem from="1706373620063" duration="93000" />
+      <workItem from="1706374149437" duration="2052000" />
+      <workItem from="1706386125050" duration="598000" />
+      <workItem from="1706420219307" duration="60000" />
+      <workItem from="1706503571420" duration="3871000" />
+      <workItem from="1706526537247" duration="23000" />
+      <workItem from="1706526851634" duration="141000" />
+      <workItem from="1706530739207" duration="19000" />
+      <workItem from="1706530826341" duration="15000" />
+      <workItem from="1706541133870" duration="345000" />
+      <workItem from="1706544381066" duration="472000" />
+      <workItem from="1706601315636" duration="599000" />
+      <workItem from="1706616308306" duration="5269000" />
+      <workItem from="1706643551831" duration="1669000" />
     </task>
     <servers />
   </component>

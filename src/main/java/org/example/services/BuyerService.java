@@ -16,7 +16,8 @@ import java.util.List;
 
 public interface BuyerService {
     List<Art> viewAllPublishedArt(String buyerName,String email);
-List<Art> viewAllArt();
+//List<Art> viewAllArt();
+//    void purchaseArt(String email, int artId, int amount);
 
     Buyer register(RegisterRequest registerRequest);
 
