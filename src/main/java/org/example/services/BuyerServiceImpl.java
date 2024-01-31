@@ -19,18 +19,16 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.example.utils.Mapper.buyerMapper;
-
 @Service
 public class BuyerServiceImpl implements BuyerService {
-    @Autowired
+   @Autowired
     private BuyerRepository buyerRepository;
-    @Autowired
+   @Autowired
     private ArtService artService;
-
     @Override
     public Buyer register(RegisterRequest registerRequest) {
         if (checkIfBuyerExist(registerRequest.getUsername(), registerRequest.getEmail()))
-            throw new BuyerExistException("User already exist");
+            throw new BuyerExistException("Buyer already exist\t"+ registerRequest.getUsername());
         validations(registerRequest);
         Buyer buyer = buyerMapper(registerRequest);
         return buyerRepository.save(buyer);
@@ -65,6 +63,7 @@ public class BuyerServiceImpl implements BuyerService {
         if (!Validator.validateEmail(registerRequest.getEmail())) {
             throw new InvalidEmailException("Invalid Email");
         }
+
     }
 
     public boolean checkIfBuyerExist(String buyerName, String email) {
@@ -80,16 +79,15 @@ public class BuyerServiceImpl implements BuyerService {
                 publishedArts.add(art);
             }
         }
-
         return publishedArts;
 
     }
 
-
     private void validateBuyer(String email) {
         Optional<Buyer> buyer = buyerRepository.findByEmail(email);
-        if (buyer.isEmpty()) {
+        if (buyer.isEmpty()){
             throw new BuyerExistException("Account doesnt exist");
         }
     }
+
 }

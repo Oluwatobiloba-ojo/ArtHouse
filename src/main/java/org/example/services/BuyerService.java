@@ -9,8 +9,15 @@ import org.example.data.model.Buyer;
 import org.example.dto.request.LoginRequest;
 import org.example.dto.request.RegisterRequest;
 
+
+import org.example.data.model.Art;
+
+import java.util.List;
+
 public interface BuyerService {
     List<Art> viewAllPublishedArt(String buyerName,String email);
+//List<Art> viewAllArt();
+//    void purchaseArt(String email, int artId, int amount);
 
     Buyer register(RegisterRequest registerRequest);
 

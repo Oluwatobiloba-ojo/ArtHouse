@@ -1,43 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
+    <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ccd1d79c-847f-4d97-ab7d-8c84e6c0229e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/dto/request/UploadRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/exception/UserNotFound.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/services/AdminServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/services/ArtService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/services/ArtServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/services/AdminServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/data/model/Art.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/data/model/Art.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/data/model/Artist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/data/model/Artist.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/data/repository/ArtRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/data/repository/ArtRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/data/repository/ArtistRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/data/repository/ArtistRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/services/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/services/AdminService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/services/ArtistService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/services/ArtistService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/services/ArtistServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/services/ArtistServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/utils/Mapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/utils/Mapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/utils/Utility.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-    </list>
+    <list default="true" id="ccd1d79c-847f-4d97-ab7d-8c84e6c0229e" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="JUnit5 Test Class" />
         <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Rebase.Settings">
+    <option name="NEW_BASE" value="main" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -49,37 +36,41 @@
   &quot;associatedIndex&quot;: 3
 }</component>
   <component name="ProjectId" id="2bJNiEjxc9UTFGURPUzHbuwZ4T0" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JUnit.AdminServiceTest.adminCanRemoveArtist.executor": "Run",
-    "JUnit.AdminServiceTest.adminCanUploadArtPresentedByArtistWithValidArtId.executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.25951087",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;isreal/branch&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Israel/IdeaProjects/ArtHouse&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.25951087&quot;,
+    &quot;settings.build.tools.auto.reload&quot;: &quot;ALL&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;build.tools&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;c26d9e8df0a5def4a35de462e99a24a1&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="org.example.exceptions" />
@@ -91,8 +82,15 @@
       <recent name="org.example.services" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.AdminServiceTest.adminCanRemoveArtist">
-    <configuration name="AdminServiceTest.adminCanRemoveArtist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.Main (1)">
+    <configuration name="ArtistServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ArtHouse" />
       <extension name="coverage">
         <pattern>
@@ -101,30 +99,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="org.example.services" />
-      <option name="MAIN_CLASS_NAME" value="org.example.services.AdminServiceTest" />
-      <option name="METHOD_NAME" value="adminCanRemoveArtist" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="org.example.services.ArtistServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AdminServiceTest.adminCanUploadArtPresentedByArtistWithValidArtId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ArtHouse" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.example.services.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.example.services" />
-      <option name="MAIN_CLASS_NAME" value="org.example.services.AdminServiceTest" />
-      <option name="METHOD_NAME" value="adminCanUploadArtPresentedByArtistWithValidArtId" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BuyerServiceImplTest.testThatArtistCanRegisterAgainWithCorrectInfoReturnsArtistObjects" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="BuyerServiceImplTest.testThatAnArtist_CanRegisterWithWrongUsernameThrowsException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ArtHouse" />
       <extension name="coverage">
         <pattern>
@@ -134,13 +115,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="org.example.services" />
       <option name="MAIN_CLASS_NAME" value="org.example.services.BuyerServiceImplTest" />
-      <option name="METHOD_NAME" value="testThatArtistCanRegisterAgainWithCorrectInfoReturnsArtistObjects" />
+      <option name="METHOD_NAME" value="testThatAnArtist_CanRegisterWithWrongUsernameThrowsException" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BuyerServiceImplTest.testThatArtistCan_RegisterAndLogin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="BuyerServiceImplTest.testThatBuyerCanViewAllArt" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ArtHouse" />
       <extension name="coverage">
         <pattern>
@@ -150,35 +131,47 @@
       </extension>
       <option name="PACKAGE_NAME" value="org.example.services" />
       <option name="MAIN_CLASS_NAME" value="org.example.services.BuyerServiceImplTest" />
-      <option name="METHOD_NAME" value="testThatArtistCan_RegisterAndLogin" />
+      <option name="METHOD_NAME" value="testThatBuyerCanViewAllArt" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BuyerServiceImplTest.testThatArtistRegisterWithCorrectInfoReturnsArtistObjects" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Main (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="ArtHouse" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.Main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.example.services.*" />
+          <option name="PATTERN" value="org.example.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="org.example.services" />
-      <option name="MAIN_CLASS_NAME" value="org.example.services.BuyerServiceImplTest" />
-      <option name="METHOD_NAME" value="testThatArtistRegisterWithCorrectInfoReturnsArtistObjects" />
-      <option name="TEST_OBJECT" value="method" />
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AdminServiceTest.adminCanRemoveArtist" />
-        <item itemvalue="JUnit.AdminServiceTest.adminCanUploadArtPresentedByArtistWithValidArtId" />
-        <item itemvalue="JUnit.BuyerServiceImplTest.testThatArtistCan_RegisterAndLogin" />
-        <item itemvalue="JUnit.BuyerServiceImplTest.testThatArtistCanRegisterAgainWithCorrectInfoReturnsArtistObjects" />
-        <item itemvalue="JUnit.BuyerServiceImplTest.testThatArtistRegisterWithCorrectInfoReturnsArtistObjects" />
+        <item itemvalue="Spring Boot.Main (1)" />
+        <item itemvalue="JUnit.ArtistServiceTest" />
+        <item itemvalue="JUnit.BuyerServiceImplTest.testThatAnArtist_CanRegisterWithWrongUsernameThrowsException" />
+        <item itemvalue="JUnit.BuyerServiceImplTest.testThatBuyerCanViewAllArt" />
+        <item itemvalue="Spring Boot.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -191,10 +184,52 @@
       <option name="presentableId" value="Default" />
       <updated>1705929357470</updated>
       <workItem from="1705929358450" duration="7274000" />
+      <workItem from="1705939873259" duration="2328000" />
+      <workItem from="1705976054193" duration="1364000" />
+      <workItem from="1705980536861" duration="883000" />
+      <workItem from="1705996731829" duration="1310000" />
+      <workItem from="1706012325026" duration="2079000" />
+      <workItem from="1706015458890" duration="296000" />
+      <workItem from="1706026437159" duration="178000" />
+      <workItem from="1706029857310" duration="3370000" />
+      <workItem from="1706096739355" duration="1814000" />
+      <workItem from="1706132630801" duration="2331000" />
+      <workItem from="1706289910130" duration="17000" />
+      <workItem from="1706355228493" duration="564000" />
+      <workItem from="1706355915909" duration="786000" />
+      <workItem from="1706356723401" duration="123000" />
+      <workItem from="1706363611970" duration="711000" />
+      <workItem from="1706365420318" duration="872000" />
+      <workItem from="1706368174135" duration="3667000" />
+      <workItem from="1706373620063" duration="93000" />
+      <workItem from="1706374149437" duration="2052000" />
+      <workItem from="1706386125050" duration="598000" />
+      <workItem from="1706420219307" duration="60000" />
+      <workItem from="1706503571420" duration="3871000" />
+      <workItem from="1706526537247" duration="23000" />
+      <workItem from="1706526851634" duration="141000" />
+      <workItem from="1706530739207" duration="19000" />
+      <workItem from="1706530826341" duration="15000" />
+      <workItem from="1706541133870" duration="345000" />
+      <workItem from="1706544381066" duration="472000" />
+      <workItem from="1706601315636" duration="599000" />
+      <workItem from="1706616308306" duration="5269000" />
+      <workItem from="1706643551831" duration="2054000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
