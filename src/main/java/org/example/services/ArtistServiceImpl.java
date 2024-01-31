@@ -82,7 +82,7 @@ public class ArtistServiceImpl implements ArtistService {
         if (artist.isPresent()) {
             return artService.findAArt(findAArtRequest.getArtId());
         }
-        return null;
+        throw new ArtNotFoundException("Art not available");
     }
 
     @Override
