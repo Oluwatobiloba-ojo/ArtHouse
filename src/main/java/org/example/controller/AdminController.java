@@ -18,7 +18,7 @@ public class AdminController {
     private AdminService adminService;
 
     @PostMapping("Admin/upload-art")
-    public ResponseEntity<?> uploadArt(@RequestBody AdminRequest adminRequest, UploadRequest uploadRequest){
+    public ResponseEntity<?> uploadArt(@RequestBody AdminRequest adminRequest,@RequestBody UploadRequest uploadRequest){
         UploadResponse uploadResponse = new UploadResponse();
 
         try {
@@ -33,7 +33,7 @@ public class AdminController {
     }
 
     @DeleteMapping("Admin/remove-artist")
-    public ResponseEntity<?> removeArtist(@RequestBody AdminRequest adminRequest, RemoveArtistRequest removeArtistRequest){
+    public ResponseEntity<?> removeArtist(@RequestBody AdminRequest adminRequest,@RequestBody RemoveArtistRequest removeArtistRequest){
         ArtistResponse removeArtistResponse = new ArtistResponse();
 
         try {

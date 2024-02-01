@@ -1,6 +1,5 @@
 package org.example.services;
 
-import org.example.data.model.Admin;
 import org.example.data.model.Art;
 import org.example.data.model.Artist;
 import org.example.data.repository.ArtRepository;
@@ -14,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
-import static org.example.utils.Mapper.mapAdmin;
 
 
 @Service
@@ -51,7 +48,6 @@ public class AdminServiceImpl implements AdminService{
 
     @Override
     public void confirmAdmin(AdminRequest adminRequest, String email, String password) {
-        Admin admin = mapAdmin(email, password);
         if (!adminRequest.getEmail().equals(email) && !adminRequest.getPassword().equals(password)){
             throw new InvalidDetailsException("Email or password incorrect");
         }
