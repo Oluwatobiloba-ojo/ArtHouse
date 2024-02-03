@@ -1,13 +1,14 @@
 package org.example.services;
 
+import org.example.data.model.Admin;
 import org.example.data.model.Art;
 import org.example.data.model.Artist;
-import org.example.data.repository.ArtRepository;
+import org.example.data.repository.AdminRepository;
 import org.example.dto.request.AdminRequest;
 import org.example.dto.request.RemoveArtistRequest;
 import org.example.dto.request.UploadRequest;
+import org.example.exceptions.AdminNotFound;
 import org.example.exceptions.ArtNotFound;
-import org.example.exceptions.InvalidDetailsException;
 import org.example.exceptions.UserNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,23 +23,23 @@ public class AdminServiceImpl implements AdminService{
     @Autowired
     ArtService artService;
     @Autowired
-    ArtRepository artRepository;
+    AdminRepository adminRepository;
 
     @Override
     public Art uploadArt(AdminRequest adminRequest, UploadRequest uploadRequest) {
-        confirmAdmin(adminRequest, adminRequest.getEmail(), adminRequest.getPassword());
+        confirmAdmin(adminRequest.getUsername());
         Optional<Artist> artist = artistService.findArtistEmail(uploadRequest.getEmail());
         if (artist == null) throw new UserNotFound("Error! Artist with this email is not found");
         Art art = artService.findArt(uploadRequest.getArtId());
         if (art == null) throw new ArtNotFound("Art belonging to this id not found");
         art.setPublished(true);
-        artRepository.save(art);
+        artService.save(art);
         return art;
     }
 
     @Override
     public void removeArtist(AdminRequest adminRequest, RemoveArtistRequest removeArtistRequest) {
-        confirmAdmin(adminRequest, adminRequest.getEmail(), adminRequest.getPassword());
+        confirmAdmin(adminRequest.getUsername());
 
         Optional<Artist> artist = artistService.findArtist(removeArtistRequest.getUsername());
         if (artist == null) throw new UserNotFound("Error! Artist with this email is not found");
@@ -47,10 +48,9 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
-    public void confirmAdmin(AdminRequest adminRequest, String email, String password) {
-        if (!adminRequest.getEmail().equals(email) && !adminRequest.getPassword().equals(password)){
-            throw new InvalidDetailsException("Email or password incorrect");
-        }
+    public void confirmAdmin(String username) {
+        Admin admin = adminRepository.findByUsername(username);
+        if (admin == null) throw new AdminNotFound("Error! Admin not found.");
 
     }
 
