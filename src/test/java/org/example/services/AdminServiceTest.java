@@ -1,10 +1,10 @@
 package org.example.services;
 
 import org.example.data.model.Art;
-import org.example.data.model.Artist;
 import org.example.data.repository.ArtRepository;
 import org.example.data.repository.ArtistRepository;
 import org.example.dto.request.*;
+import org.example.exceptions.AdminNotFound;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class AdminServiceTest {
@@ -34,26 +33,45 @@ public class AdminServiceTest {
 
 
     @Test
-    void adminCanUploadArtDisplayedByArtistWithValidArtId() {
+    void adminCanUploadArtDisplayedByArtistWithValidUsername() {
         RegisterRequest registerRequest = request("usernames", "password123", "veraba@gmail.com");
         artistService.register(registerRequest);
 
         LoginRequest loginRequest = loginRequest("usernames", "password123", "veraba@gmail.com");
         artistService.login(loginRequest);
 
-        Art art;
-        DisplayArtRequest displayArtRequest = artRequest("Art", BigDecimal.valueOf(1000), "usernames", "An art", "veraba@gmail.com");
-        artistService.displayArt(displayArtRequest);
 
-        AdminRequest adminRequest = adminRequest("admin@gmail.com", "admin12");
-        UploadRequest uploadRequest = requestUpload(1, "veraba@gmail.com");
+        DisplayArtRequest displayArtRequest = artRequest("Art", BigDecimal.valueOf(1000), "usernames", "An art", "veraba@gmail.com");
+        Art art = artistService.displayArt(displayArtRequest);
+
+        AdminRequest adminRequest = adminRequest("Admin");
+        UploadRequest uploadRequest = requestUpload(art.getId(), "veraba@gmail.com");
         art = adminService.uploadArt(adminRequest, uploadRequest);
 
         assertTrue(art.isPublished());
     }
 
     @Test
-    void adminCanRemoveArtist() {
+    void ThrowException_adminTriesToUploadArtWithWrongUsername() {
+        RegisterRequest registerRequest = request("usernames", "password123", "veraba@gmail.com");
+        artistService.register(registerRequest);
+
+        LoginRequest loginRequest = loginRequest("usernames", "password123", "veraba@gmail.com");
+        artistService.login(loginRequest);
+
+
+        DisplayArtRequest displayArtRequest = artRequest("Art", BigDecimal.valueOf(1000), "usernames", "An art", "veraba@gmail.com");
+        Art art = artistService.displayArt(displayArtRequest);
+
+        AdminRequest adminRequest = adminRequest("Tobi");
+        UploadRequest uploadRequest = requestUpload(art.getId(), "veraba@gmail.com");
+
+        assertThrows(AdminNotFound.class, ()->adminService.uploadArt(adminRequest, uploadRequest));
+    }
+
+
+    @Test
+    void adminCanRemoveArtistWithCorrectUsername() {
         RegisterRequest registerRequest1 = request("username", "password1", "email@gmail.com");
         artistService.register(registerRequest1);
         assertEquals(1, artistRepository.count());
@@ -61,11 +79,26 @@ public class AdminServiceTest {
         LoginRequest loginRequest = loginRequest("username", "password1", "email@gmail.com");
         artistService.login(loginRequest);
 
-        AdminRequest adminRequest = adminRequest("admin@gmail.com", "admin12");
+        AdminRequest adminRequest = adminRequest("Admin");
         RemoveArtistRequest removeArtistRequest = removeArtistRequest("username", "email@gmail.com");
 
         adminService.removeArtist(adminRequest, removeArtistRequest);
         assertEquals(0, artistRepository.count());
+    }
+
+    @Test
+    void throwException_AdminTriesToRemoveArtistWithWrongUsername() {
+        RegisterRequest registerRequest1 = request("username", "password1", "email@gmail.com");
+        artistService.register(registerRequest1);
+        assertEquals(1, artistRepository.count());
+
+        LoginRequest loginRequest = loginRequest("username", "password1", "email@gmail.com");
+        artistService.login(loginRequest);
+
+        AdminRequest adminRequest = adminRequest("Tobi");
+        RemoveArtistRequest removeArtistRequest = removeArtistRequest("username", "email@gmail.com");
+
+        assertThrows(AdminNotFound.class, ()->adminService.removeArtist(adminRequest, removeArtistRequest));
     }
 
     @Test
@@ -97,7 +130,7 @@ public class AdminServiceTest {
         assertEquals(4, artRepository.findArtsByArtist_Email("vera@gmail.com").size());
         assertEquals(1, artRepository.findArtsByArtist_Email("susan@gmail.com").size());
 
-        AdminRequest adminRequest = adminRequest("admin@gmail.com", "admin12");
+        AdminRequest adminRequest = adminRequest("Admin");
         RemoveArtistRequest removeArtistRequest = removeArtistRequest("vera", "vera@gmail.com");
 
         adminService.removeArtist(adminRequest, removeArtistRequest);
@@ -140,10 +173,9 @@ public class AdminServiceTest {
         return loginRequest;
     }
 
-    private AdminRequest adminRequest(String email, String password) {
+    private AdminRequest adminRequest(String username) {
         AdminRequest adminRequest = new AdminRequest();
-        adminRequest.setEmail(email);
-        adminRequest.setPassword(password);
+        adminRequest.setUsername(username);
         return adminRequest;
     }
 

@@ -41,10 +41,5 @@ public class Mapper {
         return art;
     }
 
-    public static Admin mapAdmin(String email, String password){
-        Admin admin = new Admin();
-        admin.setEmail("admin@gmail.com");
-        admin.setPassword("admin12");
-        return admin;
-    }
+
 }

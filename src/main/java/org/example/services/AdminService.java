@@ -10,7 +10,5 @@ public interface AdminService {
     Art uploadArt(AdminRequest adminRequest, UploadRequest uploadRequest);
 
     void removeArtist(AdminRequest adminRequest, RemoveArtistRequest removeArtistRequest);
-
-
-    void confirmAdmin(AdminRequest adminRequest, String email, String password);
+    void confirmAdmin(String username);
 }

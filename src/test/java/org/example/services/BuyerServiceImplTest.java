@@ -120,12 +120,11 @@ public class BuyerServiceImplTest {
         displayArtRequest.setAmount(BigDecimal.valueOf(3000));
        Art art = artistService.displayArt(displayArtRequest);
         AdminRequest adminRequest = new AdminRequest();
-        adminRequest.setEmail("admin@gmail.com");
+        adminRequest.setUsername("Admin");
         adminRequest.setPassword("admin12");
         UploadRequest uploadRequest = new UploadRequest();
         uploadRequest.setArtId(art.getId());
         uploadRequest.setEmail("deborahdelighted5@gmail.com");
-        uploadRequest.setArtistId(artist.getId());
         adminService.uploadArt(adminRequest,uploadRequest);
         DisplayArtRequest displayArtRequest1 = new DisplayArtRequest();
         displayArtRequest1.setEmail("deborahdelighted5@gmail.com");
@@ -137,7 +136,6 @@ public class BuyerServiceImplTest {
         UploadRequest uploadRequest1 = new UploadRequest();
         uploadRequest1.setArtId(art1.getId());
         uploadRequest1.setEmail("deborahdelighted5@gmail.com");
-        uploadRequest1.setArtistId(artist.getId());
         adminService.uploadArt(adminRequest,uploadRequest1);
         DisplayArtRequest displayArtRequest2 = new DisplayArtRequest();
         displayArtRequest2.setEmail("deborahdelighted5@gmail.com");
@@ -149,7 +147,6 @@ public class BuyerServiceImplTest {
         UploadRequest uploadRequest2 = new UploadRequest();
         uploadRequest2.setArtId(art2.getId());
         uploadRequest2.setEmail("deborahdelighted5@gmail.com");
-        uploadRequest2.setArtistId(artist.getId());
         adminService.uploadArt(adminRequest,uploadRequest2);
         assertEquals(3, artistService.findAllArt("Iyanu","deborahdelighted5@gmail.com").size());
         assertEquals(3, buyerService.viewAllPublishedArt("Sandra","joy@gmail.com").size());

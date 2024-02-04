@@ -18,12 +18,12 @@ public class AdminController {
     private AdminService adminService;
 
     @PostMapping("Admin/upload-art")
-    public ResponseEntity<?> uploadArt(@RequestBody AdminRequest adminRequest, UploadRequest uploadRequest){
+    public ResponseEntity<?> uploadArt(@RequestBody AdminRequest adminRequest,@RequestBody UploadRequest uploadRequest){
         UploadResponse uploadResponse = new UploadResponse();
 
         try {
             adminService.uploadArt(adminRequest, uploadRequest);
-            uploadResponse.setMessage("Art with Id " + uploadRequest.getArtId() + "displayed by artist with Id " + uploadRequest.getArtistId() + "has been uploaded successfully");
+            uploadResponse.setMessage("Art with Id " + uploadRequest.getArtId() +  "has been uploaded successfully");
             return new ResponseEntity<>(new ApiResponse(true,uploadResponse), HttpStatus.ACCEPTED);
         }
         catch (Exception exception){
@@ -33,7 +33,7 @@ public class AdminController {
     }
 
     @DeleteMapping("Admin/remove-artist")
-    public ResponseEntity<?> removeArtist(@RequestBody AdminRequest adminRequest, RemoveArtistRequest removeArtistRequest){
+    public ResponseEntity<?> removeArtist(@RequestBody AdminRequest adminRequest,@RequestBody RemoveArtistRequest removeArtistRequest){
         ArtistResponse removeArtistResponse = new ArtistResponse();
 
         try {

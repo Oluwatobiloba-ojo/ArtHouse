@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class UploadRequest {
     private long artId;
-    private long artistId;
+    private String artName;
     private String email;
 }
