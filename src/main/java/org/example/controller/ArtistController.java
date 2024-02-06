@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/artists")
+@RequestMapping("/artist")
 public class ArtistController {
     @Autowired
     private  ArtistService artistService;
 
     @PostMapping("/register")
-    public ResponseEntity<String> register( @RequestBody RegisterRequest registerRequest) {
+    public ResponseEntity<String> register( @RequestParam("registerRequest") RegisterRequest registerRequest) {
         try {
             artistService.register(registerRequest);
             return ResponseEntity.status(HttpStatus.CREATED).body("Registration successful");
@@ -30,7 +30,7 @@ public class ArtistController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login( @RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<String> login( @RequestParam("loginRequest") LoginRequest loginRequest) {
         try {
             artistService.login(loginRequest);
             return ResponseEntity.ok("Login successful");
@@ -40,27 +40,32 @@ public class ArtistController {
     }
 
     @PostMapping("/displayArt")
-    public ResponseEntity<String> displayArt(@RequestBody DisplayArtRequest displayArtRequest) {
+    public ResponseEntity<Art> displayArt(@RequestParam("displayArtRequest") DisplayArtRequest displayArtRequest) {
         try {
-            artistService.displayArt(displayArtRequest);
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body("Art displayed successfully");
+            return new ResponseEntity<>(artistService.displayArt(displayArtRequest), HttpStatus.ACCEPTED);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to display art: " + e.getMessage());
+            e.fillInStackTrace();
+            return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @GetMapping("/viewAllArt")
-    public ResponseEntity<List<Art>> viewAllArt(@RequestParam String username, @RequestParam String email) {
-        List<Art> artList = artistService.findAllArt(username, email);
-        return ResponseEntity.ok(artList);
+    public ResponseEntity<List<Art>> viewAllArt(@RequestParam("username") String username, @RequestParam("email") String email) {
+        try {
+            return new ResponseEntity<>(artistService.findAllArt(username, email), HttpStatus.ACCEPTED);
+        } catch (Exception e) {
+            e.fillInStackTrace();
+            return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/findArt")
-    public ResponseEntity<Art> findArt(@ModelAttribute FindAArtRequest findAArtRequest) {
+    public ResponseEntity<Art> findArt(@RequestParam("findAArtRequest") FindAArtRequest findAArtRequest) {
         try {
             Art foundArt = artistService.findAArt(findAArtRequest);
-            return ResponseEntity.ok(foundArt);
+            return new ResponseEntity<>(foundArt, HttpStatus.ACCEPTED);
         } catch (Exception e) {
+            e.fillInStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
