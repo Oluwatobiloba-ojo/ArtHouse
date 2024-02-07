@@ -1,8 +1,8 @@
 package org.example.data.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -21,5 +21,6 @@ public class Art {
     private BigDecimal price;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "artist_id", referencedColumnName = "id")
+    @JsonIgnore
     private Artist artist;
 }
