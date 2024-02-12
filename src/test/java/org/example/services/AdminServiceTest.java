@@ -31,7 +31,6 @@ public class AdminServiceTest {
         artRepository.deleteAll();
     }
 
-
     @Test
     void adminCanUploadArtDisplayedByArtistWithValidUsername() {
         RegisterRequest registerRequest = request("usernames", "password123", "veraba@gmail.com");

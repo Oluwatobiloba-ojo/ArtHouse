@@ -9,11 +9,13 @@ import org.example.dto.request.RemoveArtistRequest;
 import org.example.dto.request.UploadRequest;
 import org.example.exceptions.AdminNotFound;
 import org.example.exceptions.ArtNotFound;
+import org.example.exceptions.InvalidDetailsException;
 import org.example.exceptions.UserNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+
 
 
 @Service
@@ -29,7 +31,7 @@ public class AdminServiceImpl implements AdminService{
     public Art uploadArt(AdminRequest adminRequest, UploadRequest uploadRequest) {
         confirmAdmin(adminRequest.getUsername());
         Optional<Artist> artist = artistService.findArtistEmail(uploadRequest.getEmail());
-        if (artist == null) throw new UserNotFound("Error! Artist with this email is not found");
+        if (artist.isEmpty()) throw new UserNotFound("Error! Artist with this email is not found");
         Art art = artService.findArt(uploadRequest.getArtId());
         if (art == null) throw new ArtNotFound("Art belonging to this id not found");
         art.setPublished(true);
@@ -42,7 +44,7 @@ public class AdminServiceImpl implements AdminService{
         confirmAdmin(adminRequest.getUsername());
 
         Optional<Artist> artist = artistService.findArtist(removeArtistRequest.getUsername());
-        if (artist == null) throw new UserNotFound("Error! Artist with this email is not found");
+        if (artist.isEmpty()) throw new UserNotFound("Error! Artist with this email is not found");
 
         artistService.remove(removeArtistRequest.getUsername(), removeArtistRequest.getEmail());
     }

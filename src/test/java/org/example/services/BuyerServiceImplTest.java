@@ -1,14 +1,13 @@
 package org.example.services;
 
+import jakarta.transaction.Transactional;
 import org.example.data.model.Art;
 import org.example.data.model.Artist;
+import org.example.data.repository.ArtRepository;
 import org.example.data.repository.ArtistRepository;
 import org.example.data.repository.BuyerRepository;
 import org.example.dto.request.*;
-import org.example.exceptions.BuyerExistException;
-import org.example.exceptions.InvalidEmailException;
-import org.example.exceptions.InvalidPasswordException;
-import org.example.exceptions.InvalidUsernameException;
+import org.example.exceptions.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +17,13 @@ import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
+@Transactional
 @SpringBootTest
 public class BuyerServiceImplTest {
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private ArtRepository artRepository;
     @Autowired
     private BuyerService buyerService;
     @Autowired
@@ -33,13 +34,14 @@ public class BuyerServiceImplTest {
     private ArtistRepository artistRepository;
 
     @AfterEach
-    public void deleteBeforeTest() {
+    public void deleteBeforeTest(){
         buyerRepository.deleteAll();
+        artRepository.deleteAll();
         artistRepository.deleteAll();
     }
 
     @Test
-    public void testThatAnArtist_CanRegisterWithWrongUsernameThrowsException() {
+    public  void  testThatABuyer_CanRegisterWithWrongUsernameThrowsException(){
         RegisterRequest registerRequest = new RegisterRequest();
         registerRequest.setUsername("star girl8");
         registerRequest.setPassword("joy,1234");
@@ -48,7 +50,7 @@ public class BuyerServiceImplTest {
     }
 
     @Test
-    public void testWhenArtistRegisterWithWrongPasswordThrowsException() {
+    public void testWhenBuyerRegisterWithWrongPasswordThrowsException(){
         RegisterRequest registerRequest = new RegisterRequest();
         registerRequest.setUsername("Precious");
         registerRequest.setPassword("ada");
@@ -57,7 +59,7 @@ public class BuyerServiceImplTest {
     }
 
     @Test
-    public void testThatWhenArtistRegisterWithWrongEmailThrowsException() {
+    public void testThatWhenBuyerRegisterWithWrongEmailThrowsException(){
         RegisterRequest registerRequest = new RegisterRequest();
         registerRequest.setUsername("Precious");
         registerRequest.setPassword("OlaPrecious");
@@ -67,7 +69,7 @@ public class BuyerServiceImplTest {
 
 
     @Test
-    public void testThatArtistCanRegisterAgainWithCorrectInfoReturnsArtistObjects() {
+    public void testThatBuyerCanRegisterAgainWithCorrectInfoReturnsArtistObjects(){
         RegisterRequest registerRequest = new RegisterRequest();
         registerRequest.setUsername("Precious");
         registerRequest.setPassword("OlaPrecious");
@@ -77,19 +79,91 @@ public class BuyerServiceImplTest {
     }
 
     @Test
-    public void testThatArtistCan_RegisterAndLogin() {
+    public void testThatBuyerCan_RegisterAndLogin(){
         RegisterRequest registerRequest = new RegisterRequest();
         LoginRequest loginRequest = new LoginRequest();
         registerRequest.setUsername("Sandra");
         registerRequest.setPassword("Olaoluwajohn");
         registerRequest.setEmail("joy@gmail.com");
-        buyerService.register(registerRequest);
+        buyerService.register(registerRequest) ;
         loginRequest.setUsername("Sandra");
         loginRequest.setPassword("Olaoluwajohn");
         loginRequest.setEmail("joy@gmail.com");
         buyerService.login(loginRequest);
     }
 
+    @Test
+     public void testThatBuyerWhenWantToPurchaseAArtWhichDoesNotExistThrowsException(){
+        RegisterRequest registerRequest = new RegisterRequest();
+        LoginRequest loginRequest = new LoginRequest();
+        registerRequest.setUsername("Sandra");
+        registerRequest.setPassword("Olaoluwajohn");
+        registerRequest.setEmail("joy@gmail.com");
+        buyerService.register(registerRequest) ;
+        loginRequest.setUsername("Sandra");
+        loginRequest.setPassword("Olaoluwajohn");
+        loginRequest.setEmail("joy@gmail.com");
+        buyerService.login(loginRequest);
+        PurchaseArtRequest purchaseArtRequest = new PurchaseArtRequest();
+        purchaseArtRequest.setBuyerUsername("Sandra");
+        purchaseArtRequest.setBuyerEmail(registerRequest.getEmail());
+        purchaseArtRequest.setArtId(1L);
+        purchaseArtRequest.setAmount(BigDecimal.valueOf(2000));
+        assertThrows(ArtNotFoundException.class, () -> buyerService.purchase(purchaseArtRequest));
+    }
+    @Test
+     public void testThatABuyerWhenItBuyAArtItDeleteTheArtOnTheRepository(){
+        RegisterRequest registerRequest = new RegisterRequest();
+        registerRequest.setUsername("Sandra");
+        registerRequest.setPassword("Olaoluwajohn");
+        registerRequest.setEmail("deborahdelighted5@gmail.com");
+        Artist artist = artistService.register(registerRequest);
+
+        LoginRequest loginRequest = new LoginRequest();
+        loginRequest.setUsername("Sandra");
+        loginRequest.setPassword("Olaoluwajohn");
+        loginRequest.setEmail("deborahdelighted5@gmail.com");
+        artistService.login(loginRequest);
+
+        DisplayArtRequest displayArtRequest = new DisplayArtRequest();
+        displayArtRequest.setArtistUsername("Sandra");
+        displayArtRequest.setArtName("Monkey on the tree");
+        displayArtRequest.setEmail(registerRequest.getEmail());
+        displayArtRequest.setDescription("A paint picture which is monkey is on the tree");
+        displayArtRequest.setAmount(BigDecimal.valueOf(3000));
+        Art registerArt = artistService.displayArt(displayArtRequest);
+
+        AdminRequest adminRequest = new AdminRequest();
+        adminRequest.setUsername("Admin");
+        adminRequest.setPassword("1234567");
+
+        UploadRequest uploadRequest = new UploadRequest();
+        uploadRequest.setArtId(registerArt.getId());
+        uploadRequest.setEmail(artist.getEmail());
+        registerArt = adminService.uploadArt(adminRequest, uploadRequest);
+
+        RegisterRequest registerRequest1 = new RegisterRequest();
+        registerRequest1.setUsername("Sandra");
+        registerRequest1.setPassword("Olaoluwajohn");
+        registerRequest1.setEmail("joy@gmail.com");
+        buyerService.register(registerRequest1);
+
+        LoginRequest loginRequest1 = new LoginRequest();
+        loginRequest1.setUsername(registerRequest1.getUsername());
+        loginRequest1.setPassword(registerRequest1.getPassword());
+        loginRequest1.setEmail(registerRequest1.getEmail());
+        buyerService.login(loginRequest1);
+
+        PurchaseArtRequest purchaseArtRequest = new PurchaseArtRequest();
+        purchaseArtRequest.setBuyerUsername("Sandra");
+        purchaseArtRequest.setBuyerEmail(registerRequest1.getEmail());
+        purchaseArtRequest.setArtId(registerArt.getId());
+        purchaseArtRequest.setAmount(BigDecimal.valueOf(3000.00));
+        assertEquals(1, artRepository.count());
+        buyerService.purchase(purchaseArtRequest);
+        assertEquals(0, artRepository.count());
+        assertThrows(ArtNotFoundException.class, ()-> buyerService.purchase(purchaseArtRequest));
+    }
     @Test
     public void testThatBuyerCanViewAllArtThatArePublished() {
         RegisterRequest registerRequest = new RegisterRequest();
@@ -106,19 +180,19 @@ public class BuyerServiceImplTest {
         registerRequestArtist.setUsername("Iyanu");
         registerRequestArtist.setPassword("Olaoluwajohn");
         registerRequestArtist.setEmail("deborahdelighted5@gmail.com");
-        artistService.register(registerRequestArtist);
+        Artist artist = artistService.register(registerRequestArtist);
         LoginRequest loginRequestArtist = new LoginRequest();
         loginRequestArtist.setUsername("Iyanu");
         loginRequestArtist.setPassword("Olaoluwajohn");
         loginRequestArtist.setEmail("deborahdelighted5@gmail.com");
-        Artist artist = artistService.login(loginRequestArtist);
+        artistService.login(loginRequestArtist);
         DisplayArtRequest displayArtRequest = new DisplayArtRequest();
         displayArtRequest.setArtistUsername("Iyanu");
         displayArtRequest.setEmail("deborahdelighted5@gmail.com");
         displayArtRequest.setArtName("Monkey on the tree");
         displayArtRequest.setDescription("A paint picture which is monkey is on the tree");
         displayArtRequest.setAmount(BigDecimal.valueOf(3000));
-       Art art = artistService.displayArt(displayArtRequest);
+        Art art = artistService.displayArt(displayArtRequest);
         AdminRequest adminRequest = new AdminRequest();
         adminRequest.setUsername("Admin");
         adminRequest.setPassword("admin12");
@@ -150,6 +224,6 @@ public class BuyerServiceImplTest {
         adminService.uploadArt(adminRequest,uploadRequest2);
         assertEquals(3, artistService.findAllArt("Iyanu","deborahdelighted5@gmail.com").size());
         assertEquals(3, buyerService.viewAllPublishedArt("Sandra","joy@gmail.com").size());
-
     }
+
 }

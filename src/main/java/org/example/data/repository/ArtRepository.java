@@ -9,8 +9,8 @@ import java.util.Optional;
 
 public interface ArtRepository extends JpaRepository<Art, Long> {
     Optional<Art> findById(Long artId);
-
     Art findArtByIdAndArtist(long Id, Artist artistId);
     Art findArtById(long id);
     List<Art> findArtsByArtist_Email(String email);
+    List<Art> findArtsByArtist(Artist artist);
 }

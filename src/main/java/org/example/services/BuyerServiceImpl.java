@@ -3,6 +3,7 @@ package org.example.services;
 import org.example.data.model.Buyer;
 import org.example.data.repository.BuyerRepository;
 import org.example.dto.request.LoginRequest;
+import org.example.dto.request.PurchaseArtRequest;
 import org.example.dto.request.RegisterRequest;
 import org.example.exceptions.*;
 import org.example.utils.Validator;
@@ -19,12 +20,14 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.example.utils.Mapper.buyerMapper;
+
 @Service
 public class BuyerServiceImpl implements BuyerService {
-   @Autowired
+    @Autowired
     private BuyerRepository buyerRepository;
-   @Autowired
+    @Autowired
     private ArtService artService;
+
     @Override
     public Buyer register(RegisterRequest registerRequest) {
         if (checkIfBuyerExist(registerRequest.getUsername(), registerRequest.getEmail()))
@@ -49,8 +52,17 @@ public class BuyerServiceImpl implements BuyerService {
         if (!foundBuyer.get().getEmail().equalsIgnoreCase(loginRequest.getEmail())) {
             throw new InvalidDetailsException("Details entered are invalid");
         }
-        foundBuyer.get().setEnable(false);
+        foundBuyer.get().setEnable(true);
         buyerRepository.save(foundBuyer.get());
+    }
+
+    @Override
+    public void purchase(PurchaseArtRequest purchaseArtRequest) {
+        if (!checkIfBuyerExist(purchaseArtRequest.getBuyerUsername(), purchaseArtRequest.getBuyerEmail()))
+            throw new BuyerExistException("Buyer does not exist");
+        Optional<Buyer> buyer = buyerRepository.findByUsername(purchaseArtRequest.getBuyerUsername());
+        if (!buyer.get().isEnable()) throw new InvalidLoginDetail("Buyer has not login to perform request");
+        artService.purchaseArt(purchaseArtRequest);
     }
 
     public void validations(RegisterRequest registerRequest) {
@@ -79,13 +91,14 @@ public class BuyerServiceImpl implements BuyerService {
                 publishedArts.add(art);
             }
         }
+
         return publishedArts;
 
     }
 
     private void validateBuyer(String email) {
         Optional<Buyer> buyer = buyerRepository.findByEmail(email);
-        if (buyer.isEmpty()){
+        if (buyer.isEmpty()) {
             throw new BuyerExistException("Account doesnt exist");
         }
     }

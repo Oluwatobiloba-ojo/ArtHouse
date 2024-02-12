@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.example.data.model.Buyer;
 import org.example.dto.request.LoginRequest;
+import org.example.dto.request.PurchaseArtRequest;
 import org.example.dto.request.RegisterRequest;
 
 
@@ -22,4 +23,5 @@ public interface BuyerService {
     Buyer register(RegisterRequest registerRequest);
 
     void login(LoginRequest loginRequest);
+    void purchase(PurchaseArtRequest purchaseArtRequest);
 }

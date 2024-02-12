@@ -6,25 +6,18 @@ import org.example.dto.request.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Optional;
 
 public interface ArtistService {
+
+
     Artist register(RegisterRequest registerRequest);
-
-    Optional<Artist> findArtist(String email);
-
-    void remove(String username, String email);
-
-    Artist login(LoginRequest loginRequest);
-
+    void  login(LoginRequest loginRequest);
     Art displayArt(DisplayArtRequest displayArtRequest);
-
-    Optional<Artist> findArtistEmail(String email);
-
     List<Art> findAllArt(String sandra, String email);
-
-    Art findAArt(FindAArtRequest findAArtRequest);
-
+    Optional<Artist> findArtist(String email);
+    Optional<Artist> findArtistEmail(String email);
+    void remove(String username, String email);
     void removeAArt(RemoveAArtRequest removeAArtRequest);
-
-
+    Art findAArt(FindAArtRequest findAArtRequest);
 }

@@ -1,12 +1,11 @@
 package org.example.services;
 
+import jakarta.transaction.Transactional;
+import org.example.data.model.Art;
 import org.example.data.repository.ArtRepository;
 import org.example.data.repository.ArtistRepository;
 import org.example.dto.request.*;
-import org.example.exceptions.ArtistExistException;
-import org.example.exceptions.InvalidEmailException;
-import org.example.exceptions.InvalidPasswordException;
-import org.example.exceptions.InvalidUsernameException;
+import org.example.exceptions.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,9 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+@Transactional
 @SpringBootTest
 class ArtistServiceTest {
 
@@ -128,8 +128,8 @@ class ArtistServiceTest {
         displayArtRequest.setDescription("A paint picture which is monkey is on the tree");
         displayArtRequest.setAmount(BigDecimal.valueOf(3000));
         artistService.displayArt(displayArtRequest);
-        assertEquals(1, artRepository.count());
         assertEquals(1, artistService.findAllArt("Sandra","deborahdelighted5@gmail.com").size());
+
     }
     @Test
     public void testThatArtistCanFindTheArtThatBelongToThem(){
@@ -163,15 +163,20 @@ class ArtistServiceTest {
         displayArtRequest2.setArtName("Merge peg");
         displayArtRequest2.setDescription("A paint picture reference collaboration");
         displayArtRequest2.setAmount(BigDecimal.valueOf(4000));
-        artistService.displayArt(displayArtRequest2);
-        assertEquals(3,artistService.findAllArt("Sandra","deborahdelighted5@gmail.com").size());
+
+        Art artToBeRemoved = artistService.displayArt(displayArtRequest2);
+        RemoveAArtRequest request = new RemoveAArtRequest();
+        request.setArtId(artToBeRemoved.getId());
+        request.setEmail(registerRequest.getEmail());
+        artistService.removeAArt(request);
+        assertEquals(2,artistService.findAllArt(registerRequest.getUsername(),registerRequest.getEmail()).size());
     }
     @Test
     public void testThatUserCanFindAArtBelongToTheUser(){
         FindAArtRequest findAArtRequest = new FindAArtRequest();
         findAArtRequest.setEmail("ArtHouse123@gmail.com");
         findAArtRequest.setArtId(1L);
-        assertNull(artistService.findAArt(findAArtRequest));
+        assertThrows(ArtNotFoundException.class, () -> artistService.findAArt(findAArtRequest));
     }
     @Test
     public void testThatUserCanRemoveArtBelongingToUser(){
@@ -182,7 +187,7 @@ class ArtistServiceTest {
         FindAArtRequest findAArtRequest = new FindAArtRequest();
         findAArtRequest.setEmail("ArtHouse123@gmail.com");
         findAArtRequest.setArtId(1L);
-        assertNull(artistService.findAArt(findAArtRequest));
+        assertThrows(ArtNotFoundException.class, () -> artistService.findAArt(findAArtRequest));
     }
 
 }
