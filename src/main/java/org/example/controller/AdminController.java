@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 public class AdminController {
     @Autowired
     private AdminService adminService;
-
     @PostMapping("Admin/upload-art")
     public ResponseEntity<?> uploadArt(@RequestBody AdminRequest adminRequest,@RequestBody UploadRequest uploadRequest){
         UploadResponse uploadResponse = new UploadResponse();

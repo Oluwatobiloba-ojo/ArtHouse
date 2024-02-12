@@ -34,7 +34,7 @@ public class ArtistServiceImpl implements ArtistService {
     }
 
     @Override
-    public Artist login(LoginRequest loginRequest) {
+    public void login(LoginRequest loginRequest) {
         if (!checkIfArtistExist(loginRequest.getUsername(), loginRequest.getEmail()))
             throw new ArtistExistException("Artist May Not exist");
         Optional<Artist> foundArtist = artistRepository.findByUsername(loginRequest.getUsername());
@@ -42,7 +42,6 @@ public class ArtistServiceImpl implements ArtistService {
             throw new InvalidDetailsException("Details entered are invalid");
         foundArtist.get().setEnable(true);
         artistRepository.save(foundArtist.get());
-        return foundArtist.get();
     }
 
     @Override
@@ -52,10 +51,12 @@ public class ArtistServiceImpl implements ArtistService {
         Optional<Artist> foundArtist = findArtist(displayArtRequest.getArtistUsername());
         if (!foundArtist.get().isEnable()) throw new InvalidLoginDetail("User have not login");
         Art art = artService.create(displayArtRequest, foundArtist.get());
-        List<Art> artList = foundArtist.get().getArtList();
-        artList.add(art);
-        foundArtist.get().setArtList(artList);
-        artistRepository.save(foundArtist.get());
+        EmailRequest emailRequest = sendMessageToAdmin(foundArtist, art);
+        emailService.sendMailMessage(emailRequest);
+        return art;
+    }
+
+    private static EmailRequest sendMessageToAdmin(Optional<Artist> foundArtist, Art art) {
         EmailRequest emailRequest = new EmailRequest();
         emailRequest.setSenderEmail(foundArtist.get().getEmail());
         emailRequest.setTitle("Request to display Art");
@@ -63,8 +64,7 @@ public class ArtistServiceImpl implements ArtistService {
                         "Art name: %s%nArt description: %s%nArt Price: %s%nArt Id: %s%nArtist Username:%s",
                 art.getName(), art.getDescription(), art.getPrice(), art.getId(), art.getArtist().getUsername()));
         emailRequest.setReceiverEmail(ADMIN_EMAIL);
-        emailService.sendMailMessage(emailRequest);
-        return art;
+        return emailRequest;
     }
 
 
@@ -73,7 +73,7 @@ public class ArtistServiceImpl implements ArtistService {
         if (!checkIfArtistExist(username, email)) throw new ArtistExistException("Artist does not exist");
         Optional<Artist> foundArtist = findArtist(username);
         if (!foundArtist.get().isEnable()) throw new InvalidLoginDetail("Unauthorized request due to invalid login");
-        return foundArtist.get().getArtList();
+        return artService.findArtBelongingToArtist(foundArtist.get());
     }
 
     @Override
@@ -82,17 +82,16 @@ public class ArtistServiceImpl implements ArtistService {
         if (artist.isPresent()) {
             return artService.findAArt(findAArtRequest.getArtId());
         }
-        return null;
+        throw new ArtNotFoundException("Art does not exist");
     }
 
     @Override
     public void removeAArt(RemoveAArtRequest removeAArtRequest) {
         Optional<Artist> artist = artistRepository.findByEmail(removeAArtRequest.getEmail());
         if (artist.isPresent()) {
-            artService.removeAArt(removeAArtRequest.getArtId());
+            Artist artist1 = artist.get();
         }
     }
-
 
     @Override
     public Optional<Artist> findArtist(String artistUsername) {

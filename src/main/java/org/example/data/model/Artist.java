@@ -15,6 +15,7 @@ public class Artist {
     private String password;
     private boolean isEnable=false;
     private String email;
-    @OneToMany(mappedBy = "artist",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Art> artList;
+
+//    @OneToMany(cascade = CascadeType.ALL,mappedBy = "artist", fetch = FetchType.EAGER, orphanRemoval = true)
+//    private List<Art> artList;
 }

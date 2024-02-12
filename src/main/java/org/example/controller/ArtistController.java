@@ -5,6 +5,9 @@ import org.example.dto.request.DisplayArtRequest;
 import org.example.dto.request.FindAArtRequest;
 import org.example.dto.request.LoginRequest;
 import org.example.dto.request.RegisterRequest;
+import org.example.dto.response.ApiResponse;
+import org.example.dto.response.FindAArtResponse;
+import org.example.dto.response.ViewAllArtResponse;
 import org.example.services.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -56,12 +59,13 @@ public class ArtistController {
     }
 
     @GetMapping("/findArt")
-    public ResponseEntity<Art> findArt(@ModelAttribute FindAArtRequest findAArtRequest) {
+    public ResponseEntity<?> findArt(@RequestBody FindAArtRequest findAArtRequest) {
+        FindAArtResponse response = new FindAArtResponse();
         try {
             Art foundArt = artistService.findAArt(findAArtRequest);
-            return ResponseEntity.ok(foundArt);
+            return new ResponseEntity<>(new ApiResponse(true, foundArt), HttpStatus.OK);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 }
